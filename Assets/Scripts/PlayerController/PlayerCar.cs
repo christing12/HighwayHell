@@ -18,6 +18,8 @@ namespace UnityTemplateProjects.PlayerController
         public float MAX_TURN = 10.0f;
         public float ANG_DECEL = 1.0f;
         public float angularVelocitySmoothSpeed = 20f;
+        public float angularVelocitySteering = 0.4f;
+        public float steeringVelocity = 25f;
         public Text speedText;
 
         // Start is called before the first frame update
@@ -26,7 +28,7 @@ namespace UnityTemplateProjects.PlayerController
             rb = GetComponent<Rigidbody>();
             Inputs = GetComponents<IInput>();
             rb.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
-            speedText.text = (START_SPEED*10).ToString("F1");
+            speedText.text = (START_SPEED * 10).ToString("F1");
         }
 
         // Update is called once per frame
@@ -73,7 +75,7 @@ namespace UnityTemplateProjects.PlayerController
             // Finding new linear velocity and updating
             Vector3 forwardAccel = fwd * linear * ACCEL;
 
-            Vector3 adjVelocity = rb.velocity + forwardAccel*Time.deltaTime;
+            Vector3 adjVelocity = rb.velocity + forwardAccel * Time.deltaTime;
 
             // Clamping to forward and backward speed
             if (adjVelocity.magnitude > MAX_FORWARD_SPEED)
@@ -85,36 +87,21 @@ namespace UnityTemplateProjects.PlayerController
                 adjVelocity = fwd * MIN_FORWARD_SPEED;
             }
 
-            // Clamping to min/max rotational speed
-            if (Mathf.Abs(adjVelocity.x) > MAX_TURN)
-            {
-                if (adjVelocity.x < 0)
-                {
-                    adjVelocity.x = -1 * MAX_TURN;
-                }
-                else
-                {
-                    adjVelocity.x = MAX_TURN;
-                }
-            }
-
             rb.velocity = adjVelocity;
 
             var angularVel = rb.angularVelocity;
 
             // move the Y angular velocity towards our target
-            float angularVelocitySteering = .4f;
             angularVel.y = Mathf.MoveTowards(angularVel.y, rotational * TURN * angularVelocitySteering, Time.deltaTime * angularVelocitySmoothSpeed);
 
             // apply the angular velocity
             rb.angularVelocity = angularVel;
 
-            float velocitySteering = 25f;
             // rotate our velocity based on current steer value
-            rb.velocity = Quaternion.Euler(0f, rotational * TURN * velocitySteering * Time.deltaTime, 0f) * rb.velocity;
+            rb.velocity = Quaternion.Euler(0f, rotational * TURN * steeringVelocity * Time.deltaTime, 0f) * rb.velocity;
 
             //Update speed text on screen
-            speedText.text = (rb.velocity.magnitude*10).ToString("F1");
+            speedText.text = (rb.velocity.magnitude * 10).ToString("F1");
         }
 
         void GatherInputs()
@@ -133,9 +120,5 @@ namespace UnityTemplateProjects.PlayerController
                 }
             }
         }
-
-
-
     }
-
 }

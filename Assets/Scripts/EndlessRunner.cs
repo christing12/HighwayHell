@@ -20,15 +20,22 @@ public class EndlessRunner : MonoBehaviour
 
     float totalDistanceTraveled = 0f; // for score calc?
     float totalTimeTraveled = 0f; // for score calc?
-    Vector3 lastFramePosition;
-    Vector3 lastPlaneSpawnPos; // the last position of the player when the plane was spawned (lastPlaneSpawnPos + zDistPlaneSpawn)
-    // is the center of the latest plane
+
 
     // NOTE: right now theres a bug that will infinitely spawn planes if distToSpawnNewPlane > ZDistPlaneSpawn
     [SerializeField, Range(0, 50)] float distToSpawnNewPlane; // distance traveled before you spawn a new plane
-    [SerializeField, Range(0, 15)] float ZDistPlaneSpawn; // how far out do the planes spawn in front of you
-    [SerializeField, Range(-5, 5)] float yHeightOfPlane; // What height the planes spawn at
-    [SerializeField, Range(0, 5)] float spawnDist; //
+   // [SerializeField, Range(-5, 5)] float yHeightOfPlane; // What height the planes spawn at
+    [Tooltip("Percentage Length of how far back you want to start spawning")]
+    [SerializeField, Range(0, 100)] float spawnBuffer;
+    [SerializeField, Range(0, 10)] int numPlanesBuffer;
+
+    private Vector3 startPos;
+    Vector3 lastFramePosition;
+    Vector3 lastPlaneSpawnPos; // the last position of the player when the plane was spawned (lastPlaneSpawnPos + zDistPlaneSpawn)
+    // is the center of the latest plane
+    Vector3 lastPlanePositionSpawnedAt;
+
+    
 
     private void Awake()
     {
@@ -40,8 +47,24 @@ public class EndlessRunner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        distToSpawnNewPlane = planePrefab.GetComponent<Collider>().bounds.size.z;
+        if(!ValidateZDist(distToSpawnNewPlane, planePrefab.GetComponent<Collider>()))
+        {
+            Debug.LogError("Z Dist to spawn new plane is less than lenght of plane");
+        }
+
+        startPos = planePrefab.transform.position;
+        for (int i = 0; i < numPlanesBuffer; i++)
+        {
+            GameObject extraPlane = ObjectPooler.SharedInstance.GetPooledObject("ground");
+            extraPlane.SetActive(true);
+            extraPlane.transform.position = startPos + Vector3.forward * (i + 1) * planePrefab.GetComponent<Collider>().bounds.size.z;
+        }
+        lastPlanePositionSpawnedAt = startPos + Vector3.forward * numPlanesBuffer * distToSpawnNewPlane;
+        Debug.Log(lastPlanePositionSpawnedAt);
         lastFramePosition = playerTruck.transform.position;
-        lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane / 2f);
+        lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane * (spawnBuffer / 100f));
+
     }
 
     // Update is called once per frame
@@ -60,18 +83,44 @@ public class EndlessRunner : MonoBehaviour
     private bool CheckToSpawnNewPlane()
     {
         float dist = Mathf.Abs(playerTruck.transform.position.z - lastPlaneSpawnPos.z);
-        Debug.Log(dist);
         if (dist >= distToSpawnNewPlane)
         {
-           // Debug.Log("Spawning New Plane");
-            GameObject plane = Instantiate(planePrefab) as GameObject;
-           // Debug.Log(plane.GetComponent<Collider>().bounds);
+            GameObject plane = ObjectPooler.SharedInstance.GetPooledObject("ground");
             lastPlaneSpawnPos = playerTruck.transform.position;
-            Vector3 spawnPoint = playerTruck.transform.position + playerTruck.transform.forward * ZDistPlaneSpawn;
-            spawnPoint.y = yHeightOfPlane;
-            plane.transform.position = spawnPoint;
+            plane.SetActive(true);
+            plane.transform.position = lastPlanePositionSpawnedAt + Vector3.forward * distToSpawnNewPlane;
+            lastPlanePositionSpawnedAt = plane.transform.position;
+
+            DisableOldGround();
+           
             return true;
         }
         return false;
+    }
+
+    private bool ValidateZDist(float ZDist, Collider collider)
+    {
+        if (ZDist > collider.bounds.size.z)
+            return false;
+        else return true;
+    }
+
+    private void DisableOldGround()
+    {
+        List<GameObject> activeGround = ObjectPooler.SharedInstance.GetActiveGameObjects("ground");
+        
+        foreach (GameObject ground in activeGround)
+        {
+            Vector3 forwardPos = ground.transform.position + Vector3.forward * ground.GetComponent<Collider>().bounds.extents.z;
+          //  float dot = Vector3.Dot(playerTruck.transform.forward, (forwardPos - playerTruck.transform.position).normalized);
+
+            float temp = forwardPos.z - playerTruck.transform.position.z;
+
+            if (forwardPos.z - playerTruck.transform.position.z < 0)
+            {
+                ground.SetActive(false);
+
+            }
+        }
     }
 }
