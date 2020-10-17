@@ -14,6 +14,11 @@ public class EndlessRunner : MonoBehaviour
     int currLevel;
     Vector3 currTrackDirection = Vector3.forward;
 
+
+    [SerializeField] private Vector3 startPos;
+
+
+
     [SerializeField] private GameObject playerTruck;
     [SerializeField] private GameObject planePrefab;
 
@@ -26,9 +31,8 @@ public class EndlessRunner : MonoBehaviour
 
     // NOTE: right now theres a bug that will infinitely spawn planes if distToSpawnNewPlane > ZDistPlaneSpawn
     [SerializeField, Range(0, 50)] float distToSpawnNewPlane; // distance traveled before you spawn a new plane
-    [SerializeField, Range(0, 15)] float ZDistPlaneSpawn; // how far out do the planes spawn in front of you
     [SerializeField, Range(-5, 5)] float yHeightOfPlane; // What height the planes spawn at
-    [SerializeField, Range(0, 5)] float spawnDist; //
+    [SerializeField, Range(0, 0.5f)] float spawnBuffer;
 
     private void Awake()
     {
@@ -40,8 +44,16 @@ public class EndlessRunner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject test = Instantiate(planePrefab);
+        //  test.SetActive(false);
+        Debug.Log(test.GetComponent<Collider>().bounds);
+        Destroy(test);
+        distToSpawnNewPlane = test.GetComponent<Collider>().bounds.size.z - spawnBuffer;
+        startPos = playerTruck.transform.position;
+
         lastFramePosition = playerTruck.transform.position;
         lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane / 2f);
+
     }
 
     // Update is called once per frame
@@ -60,16 +72,25 @@ public class EndlessRunner : MonoBehaviour
     private bool CheckToSpawnNewPlane()
     {
         float dist = Mathf.Abs(playerTruck.transform.position.z - lastPlaneSpawnPos.z);
-        Debug.Log(dist);
+     //   Debug.Log(dist + " LAST PALNE: " + distToSpawnNewPlane);
+        
         if (dist >= distToSpawnNewPlane)
         {
-           // Debug.Log("Spawning New Plane");
             GameObject plane = Instantiate(planePrefab) as GameObject;
-           // Debug.Log(plane.GetComponent<Collider>().bounds);
             lastPlaneSpawnPos = playerTruck.transform.position;
-            Vector3 spawnPoint = playerTruck.transform.position + playerTruck.transform.forward * ZDistPlaneSpawn;
-            spawnPoint.y = yHeightOfPlane;
-            plane.transform.position = spawnPoint;
+
+            Debug.Log(startPos.x + "  PLAYER POS : " + playerTruck.transform.position);
+
+            float zPos = playerTruck.transform.position.z + distToSpawnNewPlane;
+            plane.transform.position = new Vector3(startPos.x, 0f, zPos);
+
+            
+
+
+
+            //Vector3 spawnPoint = playerTruck.transform.position + playerTruck.transform.forward * ZDistPlaneSpawn;
+            //spawnPoint.y = yHeightOfPlane;
+            //plane.transform.position = spawnPoint;
             return true;
         }
         return false;

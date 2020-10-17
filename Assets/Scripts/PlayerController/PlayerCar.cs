@@ -26,7 +26,7 @@ namespace UnityTemplateProjects.PlayerController
             Rigidbody = GetComponent<Rigidbody>();
             Inputs = GetComponents<IInput>();
             Rigidbody.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
-            speedText.text = (START_SPEED*10).ToString("F1");
+          //  speedText.text = (START_SPEED*10).ToString("F1");
         }
 
         // Update is called once per frame
@@ -112,7 +112,7 @@ namespace UnityTemplateProjects.PlayerController
             Rigidbody.velocity = Quaternion.Euler(0f, rotational * TURN * velocitySteering * Time.deltaTime, 0f) * Rigidbody.velocity;
 
             //Update speed text on screen
-            speedText.text = (Rigidbody.velocity.z*10).ToString("F1");
+            //speedText.text = (Rigidbody.velocity.z*10).ToString("F1");
         }
 
         void GatherInputs()
