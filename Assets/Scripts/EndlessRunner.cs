@@ -47,8 +47,8 @@ public class EndlessRunner : MonoBehaviour
         GameObject test = Instantiate(planePrefab);
         //  test.SetActive(false);
         Debug.Log(test.GetComponent<Collider>().bounds);
-        Destroy(test);
         distToSpawnNewPlane = test.GetComponent<Collider>().bounds.size.z - spawnBuffer;
+        Destroy(test);
         startPos = playerTruck.transform.position;
 
         lastFramePosition = playerTruck.transform.position;
