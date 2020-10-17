@@ -16,6 +16,7 @@ public class EndlessRunner : MonoBehaviour
 
     [SerializeField] private GameObject playerTruck;
     [SerializeField] private GameObject planePrefab;
+    [SerializeField] private 
 
 
     float totalDistanceTraveled = 0f; // for score calc?
@@ -88,7 +89,7 @@ public class EndlessRunner : MonoBehaviour
             GameObject plane = ObjectPooler.SharedInstance.GetPooledObject("ground");
             lastPlaneSpawnPos = playerTruck.transform.position;
             plane.SetActive(true);
-            plane.transform.position = lastPlanePositionSpawnedAt + Vector3.forward * distToSpawnNewPlane;
+            plane.transform.position = lastPlanePositionSpawnedAt + Vector3.forward * distToSpawnNewPlane - Vector3.up * 0.0001f;
             lastPlanePositionSpawnedAt = plane.transform.position;
 
             DisableOldGround();
@@ -113,9 +114,6 @@ public class EndlessRunner : MonoBehaviour
         {
             Vector3 forwardPos = ground.transform.position + Vector3.forward * ground.GetComponent<Collider>().bounds.extents.z;
           //  float dot = Vector3.Dot(playerTruck.transform.forward, (forwardPos - playerTruck.transform.position).normalized);
-
-            float temp = forwardPos.z - playerTruck.transform.position.z;
-
             if (forwardPos.z - playerTruck.transform.position.z < 0)
             {
                 ground.SetActive(false);
