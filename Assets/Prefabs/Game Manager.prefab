@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3802969527612941281}
   - component: {fileID: 3802969527612941280}
+  - component: {fileID: 285058350}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -45,5 +46,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTruck: {fileID: 0}
   planePrefab: {fileID: 0}
-  distToSpawnNewPlane: 14
-  spawnBuffer: 0.154
+  distToSpawnNewPlane: 9
+  spawnBuffer: 9.7
+  numPlanesBuffer: 5
+--- !u!114 &285058350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802969527612941286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40bd437cab9bd0c4a8c9111e087e26c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool:
+  - objectToPool: {fileID: 0}
+    amountToPool: 10
+  pooledObjects: []
