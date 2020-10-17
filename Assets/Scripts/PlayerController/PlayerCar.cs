@@ -14,8 +14,9 @@ namespace UnityTemplateProjects.PlayerController
         public float START_SPEED = 7.5f;
         public float ACCEL = 1.0f;
         public float TURN = 2.0f;
-        public float MAX_TURN = 3.0f;
+        public float MAX_TURN = 10.0f;
         public float ANG_DECEL = 1.0f;
+        public float angularVelocitySmoothSpeed = 20f;
 
         // Start is called before the first frame update
         void Start()
@@ -63,44 +64,11 @@ namespace UnityTemplateProjects.PlayerController
             }
 
             // Getting current car state
-            Vector3 fwd = Rigidbody.transform.forward;
+            Quaternion turnAngle = Quaternion.AngleAxis(rotational * TURN, Rigidbody.transform.up);
+            Vector3 fwd = turnAngle * Rigidbody.transform.forward;
 
             // Finding new linear velocity and updating
             Vector3 adjVelocity = Rigidbody.velocity + new Vector3(0,0, linear * ACCEL * Time.deltaTime);
-
-            // Finding new rotation veloicty and updating
-            Vector3 turnAccel = new Vector3(TURN * rotational, 0, 0);
-
-            if (rotational == 0)
-            {
-                if (Mathf.Abs(adjVelocity.x) > 0)
-                {
-                    if (adjVelocity.x > 0)
-                    {
-                        if (Mathf.Abs(adjVelocity.x) < ANG_DECEL * Time.deltaTime)
-                        {
-                            turnAccel = new Vector3(-1*adjVelocity.x / Time.deltaTime,0,0);
-                        }
-                        else
-                        {
-                            turnAccel = new Vector3(-1 * ANG_DECEL, 0, 0);
-                        }
-                    }
-                    else
-                    {
-                        if (Mathf.Abs(adjVelocity.x) < ANG_DECEL * Time.deltaTime)
-                        {
-                            turnAccel = new Vector3(-1*adjVelocity.x / Time.deltaTime,0,0);
-                        }
-                        else
-                        {
-                            turnAccel = new Vector3(ANG_DECEL, 0, 0);
-                        }
-                    }
-                }
-            }
-
-            adjVelocity += turnAccel*Time.deltaTime;
 
             // Clamping to min/max rotational speed
             if (Mathf.Abs(adjVelocity.x) > MAX_TURN)
@@ -125,14 +93,20 @@ namespace UnityTemplateProjects.PlayerController
                 adjVelocity.z = MIN_FORWARD_SPEED;
             }
 
-            Quaternion rotationQuat = new Quaternion();
-            rotationQuat.SetFromToRotation(fwd, adjVelocity);
-
-            Rigidbody.rotation = rotationQuat;
-
-
-
             Rigidbody.velocity = adjVelocity;
+
+            var angularVel = Rigidbody.angularVelocity;
+
+            // move the Y angular velocity towards our target
+            float angularVelocitySteering = .4f;
+            angularVel.y = Mathf.MoveTowards(angularVel.y, rotational * TURN * angularVelocitySteering, Time.deltaTime * angularVelocitySmoothSpeed);
+
+            // apply the angular velocity
+            Rigidbody.angularVelocity = angularVel;
+
+            float velocitySteering = 25f;
+            // rotate our velocity based on current steer value
+            Rigidbody.velocity = Quaternion.Euler(0f, rotational * TURN * velocitySteering * Time.deltaTime, 0f) * Rigidbody.velocity;
         }
 
         void GatherInputs()
