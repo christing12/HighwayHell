@@ -138,8 +138,7 @@ PrefabInstance:
         type: 3}
       propertyPath: planePrefab
       value: 
-      objectReference: {fileID: 220390788370341305, guid: 36a6dd3cf198e3245ba8aff5cc22994b,
-        type: 3}
+      objectReference: {fileID: 1173266046}
     - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
       propertyPath: playerTruck
@@ -163,17 +162,17 @@ PrefabInstance:
     - target: {fileID: 3802969527612941281, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.07202863
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3802969527612941281, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.8680718
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3802969527612941281, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.1392784
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3802969527612941281, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
@@ -321,6 +320,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1173266046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 220390788370341305, guid: 36a6dd3cf198e3245ba8aff5cc22994b,
+    type: 3}
+  m_PrefabInstance: {fileID: 220390788813060892}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1287489102
 GameObject:
   m_ObjectHideFlags: 0

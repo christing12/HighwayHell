@@ -14,25 +14,23 @@ public class EndlessRunner : MonoBehaviour
     int currLevel;
     Vector3 currTrackDirection = Vector3.forward;
 
-
-    [SerializeField] private Vector3 startPos;
-
-
-
     [SerializeField] private GameObject playerTruck;
     [SerializeField] private GameObject planePrefab;
 
 
     float totalDistanceTraveled = 0f; // for score calc?
     float totalTimeTraveled = 0f; // for score calc?
-    Vector3 lastFramePosition;
-    Vector3 lastPlaneSpawnPos; // the last position of the player when the plane was spawned (lastPlaneSpawnPos + zDistPlaneSpawn)
-    // is the center of the latest plane
+
 
     // NOTE: right now theres a bug that will infinitely spawn planes if distToSpawnNewPlane > ZDistPlaneSpawn
     [SerializeField, Range(0, 50)] float distToSpawnNewPlane; // distance traveled before you spawn a new plane
-    [SerializeField, Range(-5, 5)] float yHeightOfPlane; // What height the planes spawn at
+   // [SerializeField, Range(-5, 5)] float yHeightOfPlane; // What height the planes spawn at
     [SerializeField, Range(0, 0.5f)] float spawnBuffer;
+
+    private Vector3 startPos;
+    Vector3 lastFramePosition;
+    Vector3 lastPlaneSpawnPos; // the last position of the player when the plane was spawned (lastPlaneSpawnPos + zDistPlaneSpawn)
+    // is the center of the latest plane
 
     private void Awake()
     {
@@ -44,12 +42,10 @@ public class EndlessRunner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject test = Instantiate(planePrefab);
-        //  test.SetActive(false);
-        Debug.Log(test.GetComponent<Collider>().bounds);
-        distToSpawnNewPlane = test.GetComponent<Collider>().bounds.size.z - spawnBuffer;
-        Destroy(test);
-        startPos = playerTruck.transform.position;
+
+        distToSpawnNewPlane = planePrefab.GetComponent<Collider>().bounds.size.z - spawnBuffer;
+
+        startPos = planePrefab.transform.position;
 
         lastFramePosition = playerTruck.transform.position;
         lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane / 2f);
