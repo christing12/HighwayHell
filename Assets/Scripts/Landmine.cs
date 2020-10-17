@@ -5,6 +5,7 @@ using UnityEngine;
 public class Landmine : MonoBehaviour
 {
     Rigidbody rb;
+    public GameObject vfx;
     public float explosionPower = 500f;
 
     private void OnCollisionEnter(Collision collision)
@@ -13,6 +14,7 @@ public class Landmine : MonoBehaviour
         {
             rb = collision.rigidbody; //gets Players rigid body
             rb.AddForce(explosionPower/1.5f, explosionPower, 0);
+            Instantiate(vfx, transform.position, Quaternion.identity);
         }
     }
 }
