@@ -18,6 +18,8 @@ namespace UnityTemplateProjects.PlayerController
         public float MAX_TURN = 10.0f;
         public float ANG_DECEL = 1.0f;
         public float angularVelocitySmoothSpeed = 20f;
+        public float angularVelocitySteering = 0.4f;
+        public float steeringVelocity = 25f;
         public Text speedText;
 
         // Start is called before the first frame update
@@ -90,15 +92,13 @@ namespace UnityTemplateProjects.PlayerController
             var angularVel = rb.angularVelocity;
 
             // move the Y angular velocity towards our target
-            float angularVelocitySteering = .4f;
             angularVel.y = Mathf.MoveTowards(angularVel.y, rotational * TURN * angularVelocitySteering, Time.deltaTime * angularVelocitySmoothSpeed);
 
             // apply the angular velocity
             rb.angularVelocity = angularVel;
 
-            float velocitySteering = 25f;
             // rotate our velocity based on current steer value
-            rb.velocity = Quaternion.Euler(0f, rotational * TURN * velocitySteering * Time.deltaTime, 0f) * rb.velocity;
+            rb.velocity = Quaternion.Euler(0f, rotational * TURN * steeringVelocity * Time.deltaTime, 0f) * rb.velocity;
 
             //Update speed text on screen
             speedText.text = (rb.velocity.magnitude * 10).ToString("F1");

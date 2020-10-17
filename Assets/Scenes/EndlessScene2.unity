@@ -144,6 +144,16 @@ PrefabInstance:
       propertyPath: planePrefab
       value: 
       objectReference: {fileID: 1173266046}
+    - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
+        type: 3}
+      propertyPath: distToSpawnNewPlane
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
+        type: 3}
+      propertyPath: spawnBuffer
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3802969527612941281, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -872,7 +882,7 @@ PrefabInstance:
     - target: {fileID: 3387319934141336890, guid: 484dbcc6565585d479d2687118f1c36d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.57
+      value: -4.55
       objectReference: {fileID: 0}
     - target: {fileID: 3387319934141336890, guid: 484dbcc6565585d479d2687118f1c36d,
         type: 3}

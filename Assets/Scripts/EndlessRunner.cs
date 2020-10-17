@@ -25,12 +25,15 @@ public class EndlessRunner : MonoBehaviour
     // NOTE: right now theres a bug that will infinitely spawn planes if distToSpawnNewPlane > ZDistPlaneSpawn
     [SerializeField, Range(0, 50)] float distToSpawnNewPlane; // distance traveled before you spawn a new plane
    // [SerializeField, Range(-5, 5)] float yHeightOfPlane; // What height the planes spawn at
-    [SerializeField, Range(0, 0.5f)] float spawnBuffer;
+    [Tooltip("Percentage Length of how far back you want to start spawning")]
+    [SerializeField, Range(0, 100)] float spawnBuffer;
+    [SerializeField, Range(0, 10)] int numPlanesBuffer;
 
     private Vector3 startPos;
     Vector3 lastFramePosition;
     Vector3 lastPlaneSpawnPos; // the last position of the player when the plane was spawned (lastPlaneSpawnPos + zDistPlaneSpawn)
     // is the center of the latest plane
+    Vector3 lastPlanePositionSpawnedAt;
 
     private void Awake()
     {
@@ -42,13 +45,22 @@ public class EndlessRunner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        distToSpawnNewPlane = planePrefab.GetComponent<Collider>().bounds.size.z - spawnBuffer;
+        distToSpawnNewPlane = planePrefab.GetComponent<Collider>().bounds.size.z;
+        if(!ValidateZDist(distToSpawnNewPlane, planePrefab.GetComponent<Collider>()))
+        {
+            Debug.LogError("Z Dist to spawn new plane is less than lenght of plane");
+        }
 
         startPos = planePrefab.transform.position;
-
+        for (int i = 0; i < numPlanesBuffer; i++)
+        {
+            GameObject extraPlane = Instantiate(planePrefab);
+            extraPlane.transform.position = startPos + Vector3.forward * (i + 1) * planePrefab.GetComponent<Collider>().bounds.size.z;
+        }
+        lastPlanePositionSpawnedAt = startPos + Vector3.forward * numPlanesBuffer * distToSpawnNewPlane;
+        Debug.Log(lastPlanePositionSpawnedAt);
         lastFramePosition = playerTruck.transform.position;
-        lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane / 2f);
+        lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane * (spawnBuffer / 100f));
 
     }
 
@@ -75,12 +87,11 @@ public class EndlessRunner : MonoBehaviour
             GameObject plane = Instantiate(planePrefab) as GameObject;
             lastPlaneSpawnPos = playerTruck.transform.position;
 
-            Debug.Log(startPos.x + "  PLAYER POS : " + playerTruck.transform.position);
+            //float zPos = playerTruck.transform.position.z + distToSpawnNewPlane;
+            //plane.transform.position = new Vector3(startPos.x, startPos.y, zPos);
 
-            float zPos = playerTruck.transform.position.z + distToSpawnNewPlane;
-            plane.transform.position = new Vector3(startPos.x, 0f, zPos);
-
-            
+            plane.transform.position = lastPlanePositionSpawnedAt + Vector3.forward * distToSpawnNewPlane;
+            lastPlanePositionSpawnedAt = plane.transform.position;
 
 
 
@@ -90,5 +101,12 @@ public class EndlessRunner : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private bool ValidateZDist(float ZDist, Collider collider)
+    {
+        if (ZDist > collider.bounds.size.z)
+            return false;
+        else return true;
     }
 }
