@@ -15,7 +15,7 @@ namespace UnityTemplateProjects.PlayerController
         public float ACCEL = 1.0f;
         public float TURN = 2.0f;
         public float MAX_TURN = 3.0f;
-        public float ANG_DRAG = 0.99f;
+        public float ANG_DECEL = 1.0f;
 
         // Start is called before the first frame update
         void Start()
@@ -70,6 +70,36 @@ namespace UnityTemplateProjects.PlayerController
 
             // Finding new rotation veloicty and updating
             Vector3 turnAccel = new Vector3(TURN * rotational, 0, 0);
+
+            if (rotational == 0)
+            {
+                if (Mathf.Abs(adjVelocity.x) > 0)
+                {
+                    if (adjVelocity.x > 0)
+                    {
+                        if (Mathf.Abs(adjVelocity.x) < ANG_DECEL * Time.deltaTime)
+                        {
+                            turnAccel = new Vector3(-1*adjVelocity.x / Time.deltaTime,0,0);
+                        }
+                        else
+                        {
+                            turnAccel = new Vector3(-1 * ANG_DECEL, 0, 0);
+                        }
+                    }
+                    else
+                    {
+                        if (Mathf.Abs(adjVelocity.x) < ANG_DECEL * Time.deltaTime)
+                        {
+                            turnAccel = new Vector3(-1*adjVelocity.x / Time.deltaTime,0,0);
+                        }
+                        else
+                        {
+                            turnAccel = new Vector3(ANG_DECEL, 0, 0);
+                        }
+                    }
+                }
+            }
+
             adjVelocity += turnAccel*Time.deltaTime;
 
             // Clamping to min/max rotational speed
