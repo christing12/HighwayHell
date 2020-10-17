@@ -7,26 +7,28 @@ namespace UnityTemplateProjects.PlayerController
 {
     public class PlayerCar : MonoBehaviour
     {
-        public Rigidbody Rigidbody;
+        public Rigidbody rb;
         public Vector2 Input;
         public IInput[] Inputs;
-        public float MAX_FORWARD_SPEED = 10.0f;
-        public float MIN_FORWARD_SPEED = 5.0f;
-        public float START_SPEED = 7.5f;
-        public float ACCEL = 1.0f;
+        public float MAX_FORWARD_SPEED = 5.0f;
+        public float MIN_FORWARD_SPEED = 2.5f;
+        public float START_SPEED = 3.75f;
+        public float ACCEL = 0.2f;
         public float TURN = 2.0f;
         public float MAX_TURN = 10.0f;
         public float ANG_DECEL = 1.0f;
         public float angularVelocitySmoothSpeed = 20f;
+        public float angularVelocitySteering = 0.4f;
+        public float steeringVelocity = 25f;
         public Text speedText;
 
         // Start is called before the first frame update
         void Start()
         {
-            Rigidbody = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
             Inputs = GetComponents<IInput>();
-            Rigidbody.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
-          //  speedText.text = (START_SPEED*10).ToString("F1");
+            rb.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
+            speedText.text = (START_SPEED * 10).ToString("F1");
         }
 
         // Update is called once per frame
@@ -67,52 +69,39 @@ namespace UnityTemplateProjects.PlayerController
             }
 
             // Getting current car state
-            Quaternion turnAngle = Quaternion.AngleAxis(rotational * TURN, Rigidbody.transform.up);
-            Vector3 fwd = turnAngle * Rigidbody.transform.forward;
+            Quaternion turnAngle = Quaternion.AngleAxis(rotational * TURN, rb.transform.up);
+            Vector3 fwd = turnAngle * rb.transform.forward;
 
             // Finding new linear velocity and updating
-            Vector3 adjVelocity = Rigidbody.velocity + new Vector3(0,0, linear * ACCEL * Time.deltaTime);
+            Vector3 forwardAccel = fwd * linear * ACCEL;
 
-            // Clamping to min/max rotational speed
-            if (Mathf.Abs(adjVelocity.x) > MAX_TURN)
+            Vector3 adjVelocity = rb.velocity + forwardAccel * Time.deltaTime;
+
+            // Clamping to forward and backward speed
+            if (adjVelocity.magnitude > MAX_FORWARD_SPEED)
             {
-                if (adjVelocity.x < 0)
-                {
-                    adjVelocity.x = -1 * MAX_TURN;
-                }
-                else
-                {
-                    adjVelocity.x = MAX_TURN;
-                } 
+                adjVelocity = fwd * MAX_FORWARD_SPEED;
+            }
+            else if (adjVelocity.magnitude < MIN_FORWARD_SPEED)
+            {
+                adjVelocity = fwd * MIN_FORWARD_SPEED;
             }
 
-            // Clamping to min/max linear speed
-            if (adjVelocity.z > MAX_FORWARD_SPEED)
-            {
-                adjVelocity.z = MAX_FORWARD_SPEED;
-            }
-            else if (adjVelocity.z < MIN_FORWARD_SPEED)
-            {
-                adjVelocity.z = MIN_FORWARD_SPEED;
-            }
+            rb.velocity = adjVelocity;
 
-            Rigidbody.velocity = adjVelocity;
-
-            var angularVel = Rigidbody.angularVelocity;
+            var angularVel = rb.angularVelocity;
 
             // move the Y angular velocity towards our target
-            float angularVelocitySteering = .4f;
             angularVel.y = Mathf.MoveTowards(angularVel.y, rotational * TURN * angularVelocitySteering, Time.deltaTime * angularVelocitySmoothSpeed);
 
             // apply the angular velocity
-            Rigidbody.angularVelocity = angularVel;
+            rb.angularVelocity = angularVel;
 
-            float velocitySteering = 25f;
             // rotate our velocity based on current steer value
-            Rigidbody.velocity = Quaternion.Euler(0f, rotational * TURN * velocitySteering * Time.deltaTime, 0f) * Rigidbody.velocity;
+            rb.velocity = Quaternion.Euler(0f, rotational * TURN * steeringVelocity * Time.deltaTime, 0f) * rb.velocity;
 
             //Update speed text on screen
-            //speedText.text = (Rigidbody.velocity.z*10).ToString("F1");
+            speedText.text = (rb.velocity.magnitude * 10).ToString("F1");
         }
 
         void GatherInputs()
@@ -131,9 +120,5 @@ namespace UnityTemplateProjects.PlayerController
                 }
             }
         }
-
-
-
     }
-
 }
