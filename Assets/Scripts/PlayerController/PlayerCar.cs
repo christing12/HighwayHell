@@ -7,12 +7,12 @@ namespace UnityTemplateProjects.PlayerController
 {
     public class PlayerCar : MonoBehaviour
     {
-        public Rigidbody Rigidbody;
+        public Rigidbody rb;
         public Vector2 Input;
         public IInput[] Inputs;
         public float MAX_FORWARD_SPEED = 0.1f;
         public float MIN_FORWARD_SPEED = 0.075f;
-        public float START_SPEED = 0.1f;
+        public float START_SPEED = 0.5f;
         public float ACCEL = 0.2f;
         public float TURN = 2.0f;
         public float MAX_TURN = 10.0f;
@@ -23,9 +23,9 @@ namespace UnityTemplateProjects.PlayerController
         // Start is called before the first frame update
         void Start()
         {
-            Rigidbody = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
             Inputs = GetComponents<IInput>();
-            Rigidbody.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
+            rb.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
             speedText.text = (START_SPEED*10).ToString("F1");
         }
 
@@ -67,22 +67,22 @@ namespace UnityTemplateProjects.PlayerController
             }
 
             // Getting current car state
-            Quaternion turnAngle = Quaternion.AngleAxis(rotational * TURN, Rigidbody.transform.up);
-            Vector3 fwd = turnAngle * Rigidbody.transform.forward;
+            Quaternion turnAngle = Quaternion.AngleAxis(rotational * TURN, rb.transform.up);
+            Vector3 fwd = turnAngle * rb.transform.forward;
 
             // Finding new linear velocity and updating
-            Vector3 forwardAccel = Rigidbody.transform.forward * linear * ACCEL;
+            Vector3 forwardAccel = rb.transform.forward * linear * ACCEL;
 
-            Vector3 adjVelocity = Rigidbody.velocity + forwardAccel*Time.deltaTime;
+            Vector3 adjVelocity = rb.velocity + forwardAccel*Time.deltaTime;
 
             // Clamping to forward and backward speed
             if (adjVelocity.magnitude > MAX_FORWARD_SPEED)
             {
-                adjVelocity = Rigidbody.transform.forward * MAX_FORWARD_SPEED;
+                adjVelocity = rb.transform.forward * MAX_FORWARD_SPEED;
             }
             else if (adjVelocity.magnitude < MIN_FORWARD_SPEED)
             {
-                adjVelocity = Rigidbody.transform.forward * MIN_FORWARD_SPEED;
+                adjVelocity = rb.transform.forward * MIN_FORWARD_SPEED;
             }
 
             // Clamping to min/max rotational speed
@@ -98,23 +98,23 @@ namespace UnityTemplateProjects.PlayerController
                 }
             }
 
-            Rigidbody.velocity = adjVelocity;
+            rb.velocity = adjVelocity;
 
-            var angularVel = Rigidbody.angularVelocity;
+            var angularVel = rb.angularVelocity;
 
             // move the Y angular velocity towards our target
             float angularVelocitySteering = .4f;
             angularVel.y = Mathf.MoveTowards(angularVel.y, rotational * TURN * angularVelocitySteering, Time.deltaTime * angularVelocitySmoothSpeed);
 
             // apply the angular velocity
-            Rigidbody.angularVelocity = angularVel;
+            rb.angularVelocity = angularVel;
 
             float velocitySteering = 25f;
             // rotate our velocity based on current steer value
-            Rigidbody.velocity = Quaternion.Euler(0f, rotational * TURN * velocitySteering * Time.deltaTime, 0f) * Rigidbody.velocity;
+            rb.velocity = Quaternion.Euler(0f, rotational * TURN * velocitySteering * Time.deltaTime, 0f) * rb.velocity;
 
             //Update speed text on screen
-            speedText.text = (Rigidbody.velocity.z*10).ToString("F1");
+            speedText.text = (rb.velocity.magnitude*10).ToString("F1");
         }
 
         void GatherInputs()
