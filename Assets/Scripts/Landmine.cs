@@ -13,7 +13,8 @@ public class Landmine : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             rb = collision.rigidbody; //gets Players rigid body
-            rb.AddForce(explosionPower/1.5f, explosionPower, 0);
+            rb.AddForce(0, explosionPower, 0);
+            transform.Rotate(0, 0, 0);
             Instantiate(vfx, transform.position, Quaternion.identity);
         }
     }
