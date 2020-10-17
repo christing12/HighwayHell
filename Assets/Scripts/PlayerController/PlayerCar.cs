@@ -10,9 +10,9 @@ namespace UnityTemplateProjects.PlayerController
         public Rigidbody rb;
         public Vector2 Input;
         public IInput[] Inputs;
-        public float MAX_FORWARD_SPEED = 0.1f;
-        public float MIN_FORWARD_SPEED = 0.075f;
-        public float START_SPEED = 0.5f;
+        public float MAX_FORWARD_SPEED = 5.0f;
+        public float MIN_FORWARD_SPEED = 2.5f;
+        public float START_SPEED = 3.75f;
         public float ACCEL = 0.2f;
         public float TURN = 2.0f;
         public float MAX_TURN = 10.0f;
@@ -71,18 +71,18 @@ namespace UnityTemplateProjects.PlayerController
             Vector3 fwd = turnAngle * rb.transform.forward;
 
             // Finding new linear velocity and updating
-            Vector3 forwardAccel = rb.transform.forward * linear * ACCEL;
+            Vector3 forwardAccel = fwd * linear * ACCEL;
 
             Vector3 adjVelocity = rb.velocity + forwardAccel*Time.deltaTime;
 
             // Clamping to forward and backward speed
             if (adjVelocity.magnitude > MAX_FORWARD_SPEED)
             {
-                adjVelocity = rb.transform.forward * MAX_FORWARD_SPEED;
+                adjVelocity = fwd * MAX_FORWARD_SPEED;
             }
             else if (adjVelocity.magnitude < MIN_FORWARD_SPEED)
             {
-                adjVelocity = rb.transform.forward * MIN_FORWARD_SPEED;
+                adjVelocity = fwd * MIN_FORWARD_SPEED;
             }
 
             // Clamping to min/max rotational speed
