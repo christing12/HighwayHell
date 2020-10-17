@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityTemplateProjects.PlayerController
 {
@@ -17,6 +18,7 @@ namespace UnityTemplateProjects.PlayerController
         public float MAX_TURN = 10.0f;
         public float ANG_DECEL = 1.0f;
         public float angularVelocitySmoothSpeed = 20f;
+        public Text speedText;
 
         // Start is called before the first frame update
         void Start()
@@ -24,6 +26,7 @@ namespace UnityTemplateProjects.PlayerController
             Rigidbody = GetComponent<Rigidbody>();
             Inputs = GetComponents<IInput>();
             Rigidbody.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
+            speedText.text = (START_SPEED*10).ToString("F1");
         }
 
         // Update is called once per frame
@@ -107,6 +110,9 @@ namespace UnityTemplateProjects.PlayerController
             float velocitySteering = 25f;
             // rotate our velocity based on current steer value
             Rigidbody.velocity = Quaternion.Euler(0f, rotational * TURN * velocitySteering * Time.deltaTime, 0f) * Rigidbody.velocity;
+
+            //Update speed text on screen
+            speedText.text = (Rigidbody.velocity.z*10).ToString("F1");
         }
 
         void GatherInputs()
