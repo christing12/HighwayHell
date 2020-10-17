@@ -36,6 +36,8 @@ public class EndlessRunner : MonoBehaviour
     // is the center of the latest plane
     Vector3 lastPlanePositionSpawnedAt;
 
+    [SerializeField, Range(0, 5)] float extraBuffer;
+
     
 
     private void Awake()
@@ -48,7 +50,7 @@ public class EndlessRunner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        distToSpawnNewPlane = planePrefab.GetComponent<Collider>().bounds.size.z;
+        distToSpawnNewPlane = planePrefab.GetComponent<Collider>().bounds.size.z - extraBuffer;
         if(!ValidateZDist(distToSpawnNewPlane, planePrefab.GetComponent<Collider>()))
         {
             Debug.LogError("Z Dist to spawn new plane is less than lenght of plane");
@@ -62,7 +64,6 @@ public class EndlessRunner : MonoBehaviour
             extraPlane.transform.position = startPos + Vector3.forward * (i + 1) * planePrefab.GetComponent<Collider>().bounds.size.z;
         }
         lastPlanePositionSpawnedAt = startPos + Vector3.forward * numPlanesBuffer * distToSpawnNewPlane;
-        Debug.Log(lastPlanePositionSpawnedAt);
         lastFramePosition = playerTruck.transform.position;
         lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane * (spawnBuffer / 100f));
 
@@ -112,7 +113,7 @@ public class EndlessRunner : MonoBehaviour
         
         foreach (GameObject ground in activeGround)
         {
-            Vector3 forwardPos = ground.transform.position + Vector3.forward * ground.GetComponent<Collider>().bounds.extents.z;
+            Vector3 forwardPos = ground.transform.position + Vector3.forward * (ground.GetComponent<Collider>().bounds.extents.z  + distToSpawnNewPlane);
           //  float dot = Vector3.Dot(playerTruck.transform.forward, (forwardPos - playerTruck.transform.position).normalized);
             if (forwardPos.z - playerTruck.transform.position.z < 0)
             {
