@@ -44,9 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTruck: {fileID: 0}
-  planePrefab: {fileID: 3130009864728842777, guid: 0610914ee30c7d0499857d0b8316a99c,
-    type: 3}
+  planePrefab: {fileID: 0}
   distToSpawnNewPlane: 14
-  ZDistPlaneSpawn: 14
-  yHeightOfPlane: -1
-  spawnDist: 0
+  spawnBuffer: 0.154
