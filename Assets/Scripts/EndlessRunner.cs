@@ -21,7 +21,8 @@ public class EndlessRunner : MonoBehaviour
     float totalDistanceTraveled = 0f; // for score calc?
     float totalTimeTraveled = 0f; // for score calc?
     Vector3 lastFramePosition;
-    Vector3 lastPlaneSpawnPos; // keeping track where you spawn planes
+    Vector3 lastPlaneSpawnPos; // the last position of the player when the plane was spawned (lastPlaneSpawnPos + zDistPlaneSpawn)
+    // is the center of the latest plane
 
     // NOTE: right now theres a bug that will infinitely spawn planes if distToSpawnNewPlane > ZDistPlaneSpawn
     [SerializeField, Range(0, 50)] float distToSpawnNewPlane; // distance traveled before you spawn a new plane
@@ -40,6 +41,7 @@ public class EndlessRunner : MonoBehaviour
     void Start()
     {
         lastFramePosition = playerTruck.transform.position;
+        lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane / 2f);
     }
 
     // Update is called once per frame
@@ -58,14 +60,16 @@ public class EndlessRunner : MonoBehaviour
     private bool CheckToSpawnNewPlane()
     {
         float dist = Mathf.Abs(playerTruck.transform.position.z - lastPlaneSpawnPos.z);
+        Debug.Log(dist);
         if (dist >= distToSpawnNewPlane)
         {
+           // Debug.Log("Spawning New Plane");
             GameObject plane = Instantiate(planePrefab) as GameObject;
+           // Debug.Log(plane.GetComponent<Collider>().bounds);
+            lastPlaneSpawnPos = playerTruck.transform.position;
             Vector3 spawnPoint = playerTruck.transform.position + playerTruck.transform.forward * ZDistPlaneSpawn;
-            //Debug.Log(spawnPoint);
             spawnPoint.y = yHeightOfPlane;
             plane.transform.position = spawnPoint;
-            lastPlaneSpawnPos = spawnPoint;
             return true;
         }
         return false;

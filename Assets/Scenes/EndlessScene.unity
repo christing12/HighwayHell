@@ -167,8 +167,8 @@ MonoBehaviour:
   playerTruck: {fileID: 919132147701915952}
   planePrefab: {fileID: 3130009864728842777, guid: 0610914ee30c7d0499857d0b8316a99c,
     type: 3}
-  distToSpawnNewPlane: 5
-  ZDistPlaneSpawn: 3
+  distToSpawnNewPlane: 7
+  ZDistPlaneSpawn: 7
   yHeightOfPlane: -1
   spawnDist: 0
 --- !u!1 &1555772544
@@ -294,7 +294,7 @@ PrefabInstance:
     - target: {fileID: 3130009864728842781, guid: 0610914ee30c7d0499857d0b8316a99c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.45
+      value: 7.16
       objectReference: {fileID: 0}
     - target: {fileID: 3130009864728842781, guid: 0610914ee30c7d0499857d0b8316a99c,
         type: 3}
@@ -353,17 +353,17 @@ PrefabInstance:
     - target: {fileID: 2915805160250731574, guid: 149c15e007bcb0741a4c25b6a39eb67b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.081
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2915805160250731574, guid: 149c15e007bcb0741a4c25b6a39eb67b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2915805160250731574, guid: 149c15e007bcb0741a4c25b6a39eb67b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.74
+      value: 7.84
       objectReference: {fileID: 0}
     - target: {fileID: 2915805160250731574, guid: 149c15e007bcb0741a4c25b6a39eb67b,
         type: 3}
