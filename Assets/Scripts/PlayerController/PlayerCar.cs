@@ -9,18 +9,19 @@ namespace UnityTemplateProjects.PlayerController
         public Rigidbody Rigidbody;
         public Vector2 Input;
         public IInput[] Inputs;
-        public float accelTimer;
-        public const float MAX_FORWARD_SPEED = 10.0f;
-        public const float MIN_FORWARD_SPEED = 5.0f;
-        public const float START_SPEED = 7.5f;
-        public const float ACCEL = 1.0f;
+        public float MAX_FORWARD_SPEED = 10.0f;
+        public float MIN_FORWARD_SPEED = 5.0f;
+        public float START_SPEED = 7.5f;
+        public float ACCEL = 1.0f;
+        public float TURN = 2.0f;
+        public float MAX_TURN = 3.0f;
+        public float ANG_DRAG = 0.99f;
 
         // Start is called before the first frame update
         void Start()
         {
             Rigidbody = GetComponent<Rigidbody>();
             Inputs = GetComponents<IInput>();
-            accelTimer = 0.0f;
             Rigidbody.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
         }
 
@@ -31,39 +32,58 @@ namespace UnityTemplateProjects.PlayerController
 
             // Processing inputs
             float linear = Input.y;
+            float rotational = Input.x;
 
-            // Getting acceleration factor
-            float accelDir;
+            // Getting linear acceleration factor
             if (linear > 0)
             {
-                accelDir = 1.0f;
+                linear = 1.0f;
             }
             else if (linear < 0)
             {
-                accelDir = -1.0f;
+                linear = -1.0f;
             }
             else
             {
-                accelDir = 0.0f;
+                linear = 0.0f;
             }
 
-            // Applying acceleration if necessary
-            float totalAccel = 0.0f;
-            if (accelDir != 0)
+            // Getting rotational acceleration factor
+            if (rotational > 0)
             {
-                totalAccel = accelDir * ACCEL;
-                accelTimer += Time.deltaTime;
+                rotational = 1.0f;
+            }
+            else if (rotational < 0)
+            {
+                rotational = -1.0f;
             }
             else
             {
-                accelTimer = 0.0f;
+                rotational = 0.0f;
             }
 
             // Getting current car state
             Vector3 fwd = Rigidbody.transform.forward;
 
-            // Finding new velocity and updating
-            Vector3 adjVelocity = Rigidbody.velocity + fwd * totalAccel * Time.deltaTime;
+            // Finding new linear velocity and updating
+            Vector3 adjVelocity = Rigidbody.velocity + new Vector3(0,0, linear * ACCEL * Time.deltaTime);
+
+            // Finding new rotation veloicty and updating
+            Vector3 turnAccel = new Vector3(TURN * rotational, 0, 0);
+            adjVelocity += turnAccel*Time.deltaTime;
+
+            // Clamping to min/max rotational speed
+            if (Mathf.Abs(adjVelocity.x) > MAX_TURN)
+            {
+                if (adjVelocity.x < 0)
+                {
+                    adjVelocity.x = -1 * MAX_TURN;
+                }
+                else
+                {
+                    adjVelocity.x = MAX_TURN;
+                } 
+            }
 
             // Clamping to min/max linear speed
             if (adjVelocity.z > MAX_FORWARD_SPEED)
@@ -74,6 +94,13 @@ namespace UnityTemplateProjects.PlayerController
             {
                 adjVelocity.z = MIN_FORWARD_SPEED;
             }
+
+            Quaternion rotationQuat = new Quaternion();
+            rotationQuat.SetFromToRotation(fwd, adjVelocity);
+
+            Rigidbody.rotation = rotationQuat;
+
+
 
             Rigidbody.velocity = adjVelocity;
         }
