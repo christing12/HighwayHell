@@ -5,8 +5,7 @@ using UnityEngine;
 public class SendFlying : MonoBehaviour
 {
     Rigidbody rbPlayer;
-    public string floorName;//Wasn't sure how to avoid floor collisions, so I just take the name of the object it is on.
-  
+    public float force = 5000;
 
     Rigidbody rb;
     Vector3 shotDirection;
@@ -19,8 +18,9 @@ public class SendFlying : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {   
-        if (collision.collider.name != floorName)
+        if (collision.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("ENEMY COLLIDED");
             rb = collision.rigidbody; //gets enemies rigid body
             Vector3 enemyPosition = rb.position;
             Vector3 playerPosition = rbPlayer.position;
@@ -30,11 +30,12 @@ public class SendFlying : MonoBehaviour
             //based on moving in the positive x direction.
             if ((shotDirection < 0 || shotDirection > 0) && playerPosition.x > enemyPosition.x)
             {
-                rb.AddForce(-5000, 5000, 0);
+                rb.AddForce(-force, force, 0);
+
             }
             else
             {
-                rb.AddForce(5000, 5000, 0);
+                rb.AddForce(force, force, 0);
             }
 
             
