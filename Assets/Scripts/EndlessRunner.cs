@@ -16,7 +16,7 @@ public class EndlessRunner : MonoBehaviour
 
     [SerializeField] private GameObject playerTruck;
     [SerializeField] private GameObject planePrefab;
-    [SerializeField] private 
+    [SerializeField] private GameObject enemyPrefab;
 
 
     float totalDistanceTraveled = 0f; // for score calc?
@@ -93,6 +93,8 @@ public class EndlessRunner : MonoBehaviour
             plane.transform.position = lastPlanePositionSpawnedAt + Vector3.forward * distToSpawnNewPlane - Vector3.up * 0.0001f;
             lastPlanePositionSpawnedAt = plane.transform.position;
 
+
+            SpawnNewEnemies(lastPlanePositionSpawnedAt , plane.GetComponent<Collider>());
             DisableOldGround();
            
             return true;
@@ -121,5 +123,15 @@ public class EndlessRunner : MonoBehaviour
 
             }
         }
+    }
+
+    private void SpawnNewEnemies(Vector3 planePosition, Collider collider)
+    {
+        Bounds b = collider.bounds;
+        float xPos = Random.Range(planePosition.x - b.extents.x, planePosition.x + b.extents.x);
+        float yPos = Random.Range(planePosition.z - b.extents.z, planePosition.z + b.extents.z);
+
+        GameObject enemy = Instantiate(enemyPrefab);
+        enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
     }
 }
