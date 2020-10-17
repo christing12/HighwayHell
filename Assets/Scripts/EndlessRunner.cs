@@ -27,8 +27,7 @@ public class EndlessRunner : MonoBehaviour
     [SerializeField, Range(0, 50)] float distToSpawnNewPlane; // distance traveled before you spawn a new plane
     [SerializeField, Range(0, 15)] float ZDistPlaneSpawn; // how far out do the planes spawn in front of you
     [SerializeField, Range(-5, 5)] float yHeightOfPlane; // What height the planes spawn at
-
-
+    [SerializeField, Range(0, 5)] float spawnDist; //
 
     private void Awake()
     {
@@ -50,7 +49,6 @@ public class EndlessRunner : MonoBehaviour
         Vector3 dirTraveledSinceLastFrame = (playerTruck.transform.position - lastFramePosition);
         float distanceInTrackDirection = Vector3.Dot(dirTraveledSinceLastFrame, currTrackDirection.normalized);
         totalDistanceTraveled += distanceInTrackDirection;
-
 
         CheckToSpawnNewPlane();
         lastFramePosition = playerTruck.transform.position;
