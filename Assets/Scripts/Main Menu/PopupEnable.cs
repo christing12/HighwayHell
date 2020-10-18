@@ -5,7 +5,7 @@ using System.Collections;
 public class PopupEnable : MonoBehaviour
 {
     public GameObject objectToToggle;
-    public GameObject mainGameScene;
+    public GameObject carToHide;
     public bool resetSelectionAfterClick;
 
     void Update()
@@ -21,8 +21,8 @@ public class PopupEnable : MonoBehaviour
         Debug.Log(active);
         objectToToggle.SetActive(active);
 
-        if (mainGameScene != null)
-            mainGameScene.SetActive(!active);
+        if (carToHide != null)
+            carToHide.SetActive(!active);
 
         if (resetSelectionAfterClick)
             EventSystem.current.SetSelectedGameObject(null);
