@@ -4823,6 +4823,7 @@ GameObject:
   - component: {fileID: 5374625601692142922}
   - component: {fileID: 5374625601678007350}
   - component: {fileID: 5374625601676304794}
+  - component: {fileID: 8951930321998418437}
   m_Layer: 0
   m_Name: FX_LandmineExplosion
   m_TagString: Untagged
@@ -9492,6 +9493,21 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8951930321998418437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5374625601691862244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b6b88d425f7234aae309cb9a973743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delay: 0
+  MaximumStress: 0.6
+  Range: 45
 --- !u!1 &5374625601691863624
 GameObject:
   m_ObjectHideFlags: 0

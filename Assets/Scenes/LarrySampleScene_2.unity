@@ -291,7 +291,7 @@ RectTransform:
   - {fileID: 1140627458}
   - {fileID: 460615796}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1749,7 +1749,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &950491343
 GameObject:
@@ -1851,7 +1851,70 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1060062239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1060062241}
+  - component: {fileID: 1060062240}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1060062240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060062239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeab3ba1afb29174d865a739196390a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 89be4df2f0f4d8d43adf3d6f914cd47f, type: 3}
+    volume: 0.231
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Explosion2
+    clip: {fileID: 8300000, guid: 89be4df2f0f4d8d43adf3d6f914cd47f, type: 3}
+    volume: 0.321
+    pitch: 1.88
+    source: {fileID: 0}
+    loop: 0
+  - name: Impact
+    clip: {fileID: 8300000, guid: ebb9033b9255a7e4f847320496e17a75, type: 3}
+    volume: 0.587
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  playlist: []
+--- !u!4 &1060062241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060062239}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4207706, y: 0.570404, z: -1.2977026}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1140627457
 GameObject:
@@ -2517,9 +2580,9 @@ MonoBehaviour:
   player: {fileID: 1704105379}
   distText: {fileID: 1203476826}
   deathThreshold: -2
-  waitTime: 5
+  waitTime: 3
   scoreSlider: {fileID: 1140627459}
-  sliderScaleFactor: 150
+  sliderScaleFactor: 200
 --- !u!4 &1526331963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 428050894853094366, guid: fbfdd597bf6af8243a1d691c10466275,
@@ -2714,7 +2777,7 @@ Transform:
   - {fileID: 487776956}
   - {fileID: 1264540980}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704105378 stripped
 GameObject:
@@ -3350,6 +3413,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: etfx_explosion_nuke
       objectReference: {fileID: 0}
+    - target: {fileID: 3411504445156602898, guid: 10f049ff32d306444b6b559b2942b768,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411504445156602898, guid: 10f049ff32d306444b6b559b2942b768,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.727
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10f049ff32d306444b6b559b2942b768, type: 3}
 --- !u!1001 &2529778196542261083
@@ -3365,12 +3438,47 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 13400000, guid: 99486df960beac744bc166180aa5ad58,
         type: 2}
+    - target: {fileID: 3799776723092730064, guid: ea68b6a664d9ffa46beb5acf7f631eae,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 14.374104
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799776723092730064, guid: ea68b6a664d9ffa46beb5acf7f631eae,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.4328394
+      objectReference: {fileID: 0}
     - target: {fileID: 3799776723092730065, guid: ea68b6a664d9ffa46beb5acf7f631eae,
         type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 99486df960beac744bc166180aa5ad58,
         type: 2}
+    - target: {fileID: 3799776723092730065, guid: ea68b6a664d9ffa46beb5acf7f631eae,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.3839207
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799776723092730065, guid: ea68b6a664d9ffa46beb5acf7f631eae,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 6.2017107
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799776723092730065, guid: ea68b6a664d9ffa46beb5acf7f631eae,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 14.238382
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799776723092730065, guid: ea68b6a664d9ffa46beb5acf7f631eae,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799776723092730065, guid: ea68b6a664d9ffa46beb5acf7f631eae,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.41685128
+      objectReference: {fileID: 0}
     - target: {fileID: 5828097930879781614, guid: ea68b6a664d9ffa46beb5acf7f631eae,
         type: 3}
       propertyPath: m_Name

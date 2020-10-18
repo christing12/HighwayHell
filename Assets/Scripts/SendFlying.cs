@@ -20,6 +20,8 @@ public class SendFlying : MonoBehaviour
     {   
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            FindObjectOfType<AudioManager>().PlaySound("Impact");
+
             //Debug.Log("ENEMY COLLIDED");
             rb = collision.rigidbody; //gets enemies rigid body
             Vector3 enemyPosition = rb.position;
@@ -31,7 +33,6 @@ public class SendFlying : MonoBehaviour
             if ((shotDirection < 0 || shotDirection > 0) && playerPosition.x > enemyPosition.x)
             {
                 rb.AddForce(-force, force, 0);
-
             }
             else
             {

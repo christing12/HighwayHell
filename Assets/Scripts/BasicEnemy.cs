@@ -13,7 +13,7 @@ public class BasicEnemy : MonoBehaviour
     //public ScoreManager gameManager;
     // Start is called before the first frame update
     //public float ScoreIncrease;
-    public AudioSource aud;
+    //public AudioSource aud;
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -35,7 +35,7 @@ public class BasicEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            aud.Play();
+            FindObjectOfType<AudioManager>().PlaySound("Explosion");
             Instantiate(vfx, transform.position, Quaternion.identity);
             //gameManager.AddScore(ScoreIncrease);
         }

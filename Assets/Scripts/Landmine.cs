@@ -16,6 +16,7 @@ public class Landmine : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            FindObjectOfType<AudioManager>().PlaySound("Explosion2");
             rb = collision.rigidbody; //gets Players rigid body
             rb.AddRelativeForce(0, explosionPower, explosionPower / 10);
             Instantiate(vfx, transform.position, Quaternion.identity);
