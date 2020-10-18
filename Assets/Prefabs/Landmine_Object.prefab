@@ -108,4 +108,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vfx: {fileID: 5374625601691862244, guid: 0a672bfd06708d549b431dbbe39efddf, type: 3}
-  explosionPower: 500
+  explosionPower: 1000

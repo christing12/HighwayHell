@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19da98e1d3b2e84f83c119ca2bcd676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfx: {fileID: 0}
+  vfx: {fileID: 8703300284200563801, guid: 7b9da98bcbc928c43b69072c5282702a, type: 3}
 --- !u!65 &394990018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19da98e1d3b2e84f83c119ca2bcd676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfx: {fileID: 0}
+  vfx: {fileID: 8703300284200563801, guid: 7b9da98bcbc928c43b69072c5282702a, type: 3}
 --- !u!65 &582940854
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1627,7 +1627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19da98e1d3b2e84f83c119ca2bcd676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfx: {fileID: 0}
+  vfx: {fileID: 8703300284200563801, guid: 7b9da98bcbc928c43b69072c5282702a, type: 3}
 --- !u!65 &1303388718
 BoxCollider:
   m_ObjectHideFlags: 0

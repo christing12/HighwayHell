@@ -35,7 +35,7 @@ namespace UnityTemplateProjects.PlayerController
         }
         private void Update()
         {
-
+            score.SetText(gameObject.transform.position.z.ToString("F1"));
 
         }
         // Update is called once per frame
