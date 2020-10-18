@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Net.Sockets;
 
 namespace UnityTemplateProjects.PlayerController
 {
@@ -183,9 +184,15 @@ namespace UnityTemplateProjects.PlayerController
                 Vector3 normal = collision.GetContact(0).normal.normalized;
                 Vector3 reflectDir = Vector3.Reflect(transform.forward, normal);
                 rb.AddForce(reflectDir * bounceForce, ForceMode.Impulse);
-                Debug.Log("HERE");
-                Debug.DrawRay(transform.position, reflectDir);
-                
+            }
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("MainCamera"))
+            {
+                transform.rotation = Quaternion.FromToRotation(transform.forward, Vector3.forward);
             }
         }
     }
