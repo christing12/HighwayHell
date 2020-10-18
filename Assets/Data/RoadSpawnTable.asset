@@ -13,13 +13,10 @@ MonoBehaviour:
   m_Name: RoadSpawnTable
   m_EditorClassIdentifier: 
   spawnable:
-  - obj: {fileID: 8283791375483144437, guid: b1b31c21985c84d47abef57a61f5eb98, type: 3}
+  - obj: {fileID: 4711783412160051336, guid: b1b31c21985c84d47abef57a61f5eb98, type: 3}
+    weight: 70
+    probabilityRange: {x: 0, y: 30}
+  - obj: {fileID: 2614899390223505280, guid: 484dbcc6565585d479d2687118f1c36d, type: 3}
     weight: 30
-    probabilityRange: {x: 0, y: 5}
-  - obj: {fileID: 1964431301856760540, guid: 2ba0988546628f04e9a2569053962880, type: 3}
-    weight: 100
-    probabilityRange: {x: 5, y: 105}
-  - obj: {fileID: 8283791375483144437, guid: 0690321e2037cae4181efe6cba0c9ef3, type: 3}
-    weight: 50
-    probabilityRange: {x: 105, y: 110}
-  totalProbabilityWeight: 110
+    probabilityRange: {x: 0, y: 30}
+  totalProbabilityWeight: 100
