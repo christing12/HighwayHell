@@ -25,8 +25,7 @@ public class Death : MonoBehaviour
         {
          //   Debug.Log("DEAD");
             Instantiate(vfx, other.transform.position, Quaternion.identity);
-            aud.Play();
-            StartCoroutine(Die());
+            if (!EndlessRunner.instance.isDeathPlaying) StartCoroutine(EndlessRunner.instance.PlayDeath(aud));
         }
     }
 
