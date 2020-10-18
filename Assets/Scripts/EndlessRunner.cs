@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using TMPro;
 
 public class EndlessRunner : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class EndlessRunner : MonoBehaviour
     Vector3 lastPlanePositionSpawnedAt;
 
     [SerializeField, Range(0, 5)] float extraBuffer;
+
 
     
 

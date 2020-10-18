@@ -22,6 +22,8 @@ namespace UnityTemplateProjects.PlayerController
         public float angularVelocitySteering = 0.4f;
         public float steeringVelocity = 25f;
         public TextMeshProUGUI speedText;
+        public TextMeshProUGUI score;
+
 
         // Start is called before the first frame update
         void Start()
@@ -31,7 +33,11 @@ namespace UnityTemplateProjects.PlayerController
             rb.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
             speedText.SetText((START_SPEED * 10).ToString("F1"));
         }
+        private void Update()
+        {
+            score.SetText(gameObject.transform.position.z.ToString("F1"));
 
+        }
         // Update is called once per frame
         void FixedUpdate()
         {
