@@ -6,22 +6,47 @@ public class Sukk : MonoBehaviour
 {   
     [SerializeField] public float gravityPull;
     public static float gravityRadius = 3f;
+    float resetPull;
+
+    bool carIsMax;
+    float carCounter;
     public float chaosEnergy;
    void Awake()
    {
        gravityRadius = GetComponent<SphereCollider>().radius;
+       carIsMax = false;
+       resetPull = gravityPull;
    }
     // Start is called before the first frame update
    
-   
+
+
     void Start()
     {
         
     }
 
+    void Update ()
+    {
+       if (carCounter >= 20000)
+       {
+         gravityPull *= -1;
+         carCounter = 0;
+         StartCoroutine(ResetCounter());
+
+       }
+    }
+
+   IEnumerator ResetCounter()
+   {
+      yield return new WaitForSeconds(1);
+      gravityPull = resetPull;
+      
+   }
+
     // Update is called once per frame
   void OnTriggerStay(Collider other)
-      {
+      { 
          if(other.attachedRigidbody)
          {
             float gravityIntensity = Vector3.Distance(transform.position, other.transform.position) /gravityRadius;
@@ -29,8 +54,30 @@ public class Sukk : MonoBehaviour
             other.attachedRigidbody.AddForce((transform.position + other.transform.position) * gravityIntensity);
             // other.attachedRigidbody.AddForce(Vector3.up * chaosEnergy);
             Debug.DrawRay(other.transform.position, transform.position - other.transform.position);
+
+            
+
+         }
+
+         if (other.tag == "Car")
+            {
+               carCounter+=1;
+               
+        ;
+
+            }
+        
+
+
          }
       }
-   }
+
+
+         
+      
+   
+   
+   
+   
 
 
