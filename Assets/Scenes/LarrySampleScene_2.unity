@@ -1885,7 +1885,7 @@ MonoBehaviour:
   sounds:
   - name: Explosion
     clip: {fileID: 8300000, guid: 89be4df2f0f4d8d43adf3d6f914cd47f, type: 3}
-    volume: 0.231
+    volume: 0.11
     pitch: 1
     source: {fileID: 0}
     loop: 0
@@ -1899,6 +1899,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ebb9033b9255a7e4f847320496e17a75, type: 3}
     volume: 0.587
     pitch: 1
+    source: {fileID: 0}
+    loop: 0
+  - name: Sukk
+    clip: {fileID: 8300000, guid: 8fd51d88f01acef43bf7169bfaf60088, type: 3}
+    volume: 0.622
+    pitch: 1.62
     source: {fileID: 0}
     loop: 0
   playlist: []

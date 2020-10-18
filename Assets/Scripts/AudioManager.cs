@@ -70,6 +70,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("Unable to play sound " + name);
             return;
         }
+        s.source.pitch = UnityEngine.Random.Range(0.7f, 1.1f);
         s.source.Play(); // play the sound
     }
 

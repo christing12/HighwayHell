@@ -32,6 +32,8 @@ public class DistToSukk : MonoBehaviour
         //Check if Sukk has caught up, and if it has, start coroutine
         if (dist <= deathThreshold)
         {
+            FindObjectOfType<AudioManager>().PlaySound("Sukk");
+
             StartCoroutine(waitForDeathCoRoutine());
         }
 
