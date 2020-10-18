@@ -303,9 +303,31 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 285058350, guid: 9ede125e2c5df5a49b2aa7cb7b971973, type: 3}
+      propertyPath: itemsToPool.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 285058350, guid: 9ede125e2c5df5a49b2aa7cb7b971973, type: 3}
       propertyPath: itemsToPool.Array.data[0].objectToPool
       value: 
       objectReference: {fileID: 1827545277}
+    - target: {fileID: 285058350, guid: 9ede125e2c5df5a49b2aa7cb7b971973, type: 3}
+      propertyPath: itemsToPool.Array.data[1].objectToPool
+      value: 
+      objectReference: {fileID: 4711783412160051336, guid: b1b31c21985c84d47abef57a61f5eb98,
+        type: 3}
+    - target: {fileID: 285058350, guid: 9ede125e2c5df5a49b2aa7cb7b971973, type: 3}
+      propertyPath: itemsToPool.Array.data[1].amountToPool
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 285058350, guid: 9ede125e2c5df5a49b2aa7cb7b971973, type: 3}
+      propertyPath: itemsToPool.Array.data[2].objectToPool
+      value: 
+      objectReference: {fileID: 2614899390223505280, guid: 484dbcc6565585d479d2687118f1c36d,
+        type: 3}
+    - target: {fileID: 285058350, guid: 9ede125e2c5df5a49b2aa7cb7b971973, type: 3}
+      propertyPath: itemsToPool.Array.data[2].amountToPool
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
       propertyPath: planePrefab
@@ -2298,6 +2320,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172674057513040038, guid: e3a226badf53e394ead2b52a1500ccfd,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172674057513040038, guid: e3a226badf53e394ead2b52a1500ccfd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3a226badf53e394ead2b52a1500ccfd, type: 3}
