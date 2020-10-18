@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class EndlessRunner : MonoBehaviour
 {
+
+    public static EndlessRunner instance;
     [SerializeField] private SpawnTable spawnTable;
     enum Level {
         Level0 = 0,
@@ -54,6 +57,7 @@ public class EndlessRunner : MonoBehaviour
         numThresholdsPassed = 1;
 
         spawnTable.ValidateSpawnable();
+        instance = this;
     }
 
     // Start is called before the first frame update
@@ -146,11 +150,9 @@ public class EndlessRunner : MonoBehaviour
         float yPos = Random.Range(planePosition.z - b.extents.z, planePosition.z + b.extents.z);
 
 
-     //   Debug.Log(totalDistanceTraveled);
         Spawnable s = spawnTable.PickSpawnable();
         int numToSpawn = Random.Range(1, numThresholdsPassed);
         numToSpawn = numToSpawn <= 0 ? 1 : numToSpawn;
-        Debug.Log(numToSpawn);
         for (int i = 0; i < numToSpawn; i++)
         {
             GameObject enemy = ObjectPooler.SharedInstance.GetPooledObjectByName(s.obj.name);
@@ -160,5 +162,22 @@ public class EndlessRunner : MonoBehaviour
                 enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
             }
         }
+    }
+
+    public bool isDeathPlaying = false;
+    public IEnumerator PlayDeath(AudioSource sound)
+    {
+        Debug.Log("Dying");
+        isDeathPlaying = true;
+        sound.Play();
+        float t = 0.0f;
+        while (sound.isPlaying)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        isDeathPlaying = false;
+        yield return new WaitForSeconds(5f - t);
+        SceneManager.LoadScene("DeathScene");
     }
 }
