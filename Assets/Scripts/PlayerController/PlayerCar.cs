@@ -24,8 +24,6 @@ namespace UnityTemplateProjects.PlayerController
         public TextMeshProUGUI speedText;
         public TextMeshProUGUI score;
 
-        private bool rotationFix = false;
-
         // Start is called before the first frame update
         void Start()
         {
@@ -135,24 +133,23 @@ namespace UnityTemplateProjects.PlayerController
             }
 
             //Prevent touching the ground to avoid the seam issue
-            float levitate = -1.08f + 0.35f;
-            if (rb.position.y <= levitate)
+            //Hardcoded to levitate on LarrySampleScene_2
+            float levitate = 0.2f;
+            if (rb.position.y <= levitate + 0.005f)
             {
-                Debug.Log("Levitating Line 141 (rem)");
                 rb.position = new Vector3(rb.position.x, levitate, rb.position.z);
                 rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
                 rb.angularVelocity = new Vector3(0, rb.angularVelocity.y, 0);
+                rb.useGravity = false;
                 //Reset the rotation once to all zeros once after reaching the levitation state
-                if (!rotationFix)
+                if (Mathf.Abs(rb.rotation.x) > 0.01f)
                 {
-                    rb.rotation = Quaternion.Euler(0, 0, 0);
-                    Debug.Log("Rotation Fix occurred, Line 148 PlayerCar.cs (rem)");
+                    rb.transform.localRotation = Quaternion.Euler(0, rb.rotation.y, 0);
                 }
-                rotationFix = true;
             }
             else
             {
-                rotationFix = false; //Reset rotation fix if you get thrown in the air
+                rb.useGravity = true;
             }
 
 
