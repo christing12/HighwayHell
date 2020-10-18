@@ -296,7 +296,7 @@ PrefabInstance:
     - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
       propertyPath: timePerThreshold
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
