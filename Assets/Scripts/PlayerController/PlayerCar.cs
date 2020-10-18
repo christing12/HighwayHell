@@ -24,7 +24,6 @@ namespace UnityTemplateProjects.PlayerController
         public TextMeshProUGUI speedText;
         public TextMeshProUGUI score;
 
-
         // Start is called before the first frame update
         void Start()
         {
@@ -115,10 +114,44 @@ namespace UnityTemplateProjects.PlayerController
             // rotate our velocity based on current steer value
             rb.velocity = Quaternion.Euler(0f, rotational * TURN * steeringVelocity * Time.deltaTime, 0f) * rb.velocity;
 
-            // Resetting local z to 0 to prevent local z rotation
+            // Resetting local z (roll) to 0 to prevent local z rotation
             Vector3 localRot = rb.transform.localRotation.eulerAngles;
             Quaternion adjLocRot = Quaternion.Euler(localRot + new Vector3(0, 0, -1 * localRot.z));
             rb.transform.localRotation = adjLocRot;
+
+            // Clamping local x (pitch) to -30 to 30 degrees
+            localRot = rb.transform.localRotation.eulerAngles;
+            if (localRot.x >= 30.0f){
+                adjLocRot = Quaternion.Euler(new Vector3(30.0f, localRot.y, localRot.z));
+                rb.transform.localRotation = adjLocRot;
+                rb.angularVelocity = new Vector3(0.0f, rb.angularVelocity.y, 0.0f);
+            }
+            else if (localRot.x <= -30.0f) {
+                adjLocRot = Quaternion.Euler(new Vector3(-30.0f, localRot.y, localRot.z));
+                rb.transform.localRotation = adjLocRot;
+                rb.angularVelocity = new Vector3(0.0f, rb.angularVelocity.y, 0.0f);
+            }
+
+            //Prevent touching the ground to avoid the seam issue
+            //Hardcoded to levitate on LarrySampleScene_2
+            float levitate = 0.2f;
+            if (rb.position.y <= levitate + 0.005f)
+            {
+                rb.position = new Vector3(rb.position.x, levitate, rb.position.z);
+                rb.velocity = new Vector3(rb.velocity.x, 0.0f, rb.velocity.z);
+                rb.angularVelocity = new Vector3(0, rb.angularVelocity.y, 0);
+                rb.useGravity = false;
+                //Reset the rotation once to all zeros once after reaching the levitation state
+                if (Mathf.Abs(rb.rotation.x) > 0.01f)
+                {
+                    rb.transform.localRotation = Quaternion.Euler(0, rb.rotation.y, 0);
+                }
+            }
+            else
+            {
+                rb.useGravity = true;
+            }
+
 
             //Update speed text on screen
             speedText.SetText((rb.velocity.magnitude * 10).ToString("F1"));

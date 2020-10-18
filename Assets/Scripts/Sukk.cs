@@ -48,7 +48,7 @@ public class Sukk : MonoBehaviour
     // Update is called once per frame
   void OnTriggerStay(Collider other)
       { 
-         if(other.attachedRigidbody)
+         if(other.attachedRigidbody && other.gameObject.tag != "triggerable")
          {
             float gravityIntensity = Vector3.Distance(transform.position, other.transform.position) /gravityRadius;
             other.attachedRigidbody.AddForce((transform.position - other.transform.position) * gravityIntensity * other.attachedRigidbody.mass * gravityPull * Time.smoothDeltaTime * chaosEnergy);
