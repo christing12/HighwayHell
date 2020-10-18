@@ -21,7 +21,16 @@ public class DistToSukk : MonoBehaviour
     public float sliderScaleFactor;
 
     private float dist; //Z distance between sukk and player car
+    public AudioSource succSound;
 
+    private void Start()
+    {
+        succSound.Play();
+        dist = player.position.z - enemy.position.z;
+        succSound.volume = 1 - (dist / sliderScaleFactor);
+        Debug.Log("succ sound: " + succSound.volume);
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -33,8 +42,7 @@ public class DistToSukk : MonoBehaviour
         //Check if Sukk has caught up, and if it has, start coroutine
         if (dist <= deathThreshold)
         {
-            //Play sukk sound effect when the player gets close
-            FindObjectOfType<AudioManager>().PlaySound("Sukk");
+            
             //Start death coroutine
             StartCoroutine(waitForDeathCoRoutine());
             //Also change camera to focus on sukk
@@ -43,6 +51,8 @@ public class DistToSukk : MonoBehaviour
         }
 
         //Update score slider display
+        succSound.volume = 1 - (dist / sliderScaleFactor);
+        Debug.Log(succSound.volume);
         float displaySlider = 1 - (dist / sliderScaleFactor);
         if (displaySlider < 0) displaySlider = 0; //Minimum value is 0, Max value is 1
         scoreSlider.value = displaySlider;
@@ -50,6 +60,9 @@ public class DistToSukk : MonoBehaviour
 
     IEnumerator waitForDeathCoRoutine()
     {
+        //Play sukk sound effect when the player gets close
+        FindObjectOfType<AudioManager>().PlaySound("Sukk");
+
         yield return new WaitForSeconds(waitTime);// Wait for one second
 
         //After the timer has completed, load death scene
