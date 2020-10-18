@@ -148,9 +148,9 @@ public class EndlessRunner : MonoBehaviour
 
      //   Debug.Log(totalDistanceTraveled);
         Spawnable s = spawnTable.PickSpawnable();
-        int upperThreshold = numThresholdsPassed > 1 ? numThresholdsPassed : 1;
-        int numToSpawn = Random.Range(numThresholdsPassed, upperThreshold);
-
+        int numToSpawn = Random.Range(numThresholdsPassed - 1, numThresholdsPassed);
+        numToSpawn = numToSpawn <= 0 ? 1 : numToSpawn;
+        Debug.Log(numToSpawn);
         for (int i = 0; i < numToSpawn; i++)
         {
             GameObject enemy = ObjectPooler.SharedInstance.GetPooledObjectByName(s.obj.name);

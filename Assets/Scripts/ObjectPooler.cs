@@ -7,7 +7,7 @@ public class ObjectPoolItem
 {
 
     public GameObject objectToPool;
-    [Range(0, 10)]
+    [Range(0, 20)]
     public int amountToPool;
 }
 

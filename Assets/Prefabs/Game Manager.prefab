@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3802969527612941281}
   - component: {fileID: 3802969527612941280}
   - component: {fileID: 285058350}
+  - component: {fileID: 1523458372}
+  - component: {fileID: 1523458373}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -44,11 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d430da6d728d5a498137dfbe5712517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTable: {fileID: 11400000, guid: 6ae3e0272a3536f4199aed8b9ec40cca, type: 2}
   playerTruck: {fileID: 0}
   planePrefab: {fileID: 0}
+  enemyPrefab: {fileID: 4711783412160051336, guid: b1b31c21985c84d47abef57a61f5eb98,
+    type: 3}
   distToSpawnNewPlane: 9
   spawnBuffer: 9.7
   numPlanesBuffer: 5
+  timePerThreshold: 10.3
+  extraBuffer: 0.31
 --- !u!114 &285058350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,4 +71,52 @@ MonoBehaviour:
   itemsToPool:
   - objectToPool: {fileID: 0}
     amountToPool: 10
+  - objectToPool: {fileID: 4711783412160051336, guid: b1b31c21985c84d47abef57a61f5eb98,
+      type: 3}
+    amountToPool: 10
+  - objectToPool: {fileID: 2614899390223505280, guid: 484dbcc6565585d479d2687118f1c36d,
+      type: 3}
+    amountToPool: 10
+  - objectToPool: {fileID: 8703212467432762844, guid: 398eac64b4ca48d4bbe810a3c686a491,
+      type: 3}
+    amountToPool: 10
   pooledObjects: []
+--- !u!114 &1523458372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802969527612941286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf5fe4d9ed058a4388727c9c42b1f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 0
+  score: {fileID: 0}
+  timeMultipler: 10
+  enabled: 1
+  highScore: 0
+  highscoreText: {fileID: 0}
+--- !u!114 &1523458373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802969527612941286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046e9c2798c7ba8429e692963cdcd80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
+  player: {fileID: 0}
+  distText: {fileID: 0}
+  deathThreshold: 2
+  waitTime: 5
+  mainCamera: {fileID: 0}
+  scoreSlider: {fileID: 0}
+  sliderScaleFactor: 250
+  succSound: {fileID: 0}
