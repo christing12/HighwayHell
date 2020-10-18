@@ -22,6 +22,7 @@ public class SwervingCarScript : MonoBehaviour
     //ShimmyCD
     public float shimmyCD;
 
+    public GameObject vfx;
 
     void Start()
     {
@@ -89,6 +90,14 @@ public class SwervingCarScript : MonoBehaviour
         {
             canShimmy = true;
             timeToShimmy = timeToShimmyDefault;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Instantiate(vfx, transform.position, Quaternion.identity);
         }
     }
 }

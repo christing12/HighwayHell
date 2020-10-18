@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace UnityTemplateProjects.PlayerController
 {
@@ -20,7 +21,7 @@ namespace UnityTemplateProjects.PlayerController
         public float angularVelocitySmoothSpeed = 20f;
         public float angularVelocitySteering = 0.4f;
         public float steeringVelocity = 25f;
-        public Text speedText;
+        public TextMeshProUGUI speedText;
 
         // Start is called before the first frame update
         void Start()
@@ -28,7 +29,7 @@ namespace UnityTemplateProjects.PlayerController
             rb = GetComponent<Rigidbody>();
             Inputs = GetComponents<IInput>();
             rb.velocity = new Vector3(0.0f, 0.0f, START_SPEED);
-            speedText.text = (START_SPEED * 10).ToString("F1");
+            speedText.SetText((START_SPEED * 10).ToString("F1"));
         }
 
         // Update is called once per frame
@@ -101,7 +102,7 @@ namespace UnityTemplateProjects.PlayerController
             rb.velocity = Quaternion.Euler(0f, rotational * TURN * steeringVelocity * Time.deltaTime, 0f) * rb.velocity;
 
             //Update speed text on screen
-            speedText.text = (rb.velocity.magnitude * 10).ToString("F1");
+            speedText.SetText((rb.velocity.magnitude * 10).ToString("F1"));
         }
 
         void GatherInputs()
