@@ -76,7 +76,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic()
     {
-        if (shouldPlayMusic == false)
+        //Must have a song ready in the playlist to do anything
+        if (shouldPlayMusic == false && playlist.Length > 0)
         {
             shouldPlayMusic = true;
             // pick a random song from our playlist
