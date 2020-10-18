@@ -44,6 +44,7 @@ public class ObjectPooler : MonoBehaviour
         {
             if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].tag == tag)
             {
+                pooledObjects[i].transform.rotation = Quaternion.identity;
                 return pooledObjects[i];
             }
         }
@@ -56,6 +57,7 @@ public class ObjectPooler : MonoBehaviour
         {
             if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].name == name)
             {
+                pooledObjects[i].transform.rotation = Quaternion.identity;
                 return pooledObjects[i];
             }
         }
