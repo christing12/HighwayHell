@@ -107,6 +107,12 @@ namespace UnityTemplateProjects.PlayerController
             // rotate our velocity based on current steer value
             rb.velocity = Quaternion.Euler(0f, rotational * TURN * steeringVelocity * Time.deltaTime, 0f) * rb.velocity;
 
+            // Resetting local z to 0 to prevent local z rotation
+            Vector3 localRot = rb.transform.localRotation.eulerAngles;
+            Quaternion adjLocRot = Quaternion.Euler(localRot + new Vector3(0, 0, -1 * localRot.z));
+            rb.transform.localRotation = adjLocRot;
+
+
             //Update speed text on screen
             speedText.SetText((rb.velocity.magnitude * 10).ToString("F1"));
         }
