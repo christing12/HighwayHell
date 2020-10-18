@@ -14,6 +14,9 @@ public class BasicEnemy : MonoBehaviour
     // Start is called before the first frame update
     //public float ScoreIncrease;
     //public AudioSource aud;
+
+
+    GameObject vfxInstantiate;
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -36,8 +39,14 @@ public class BasicEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall"))
         {
             FindObjectOfType<AudioManager>().PlaySound("Explosion");
-            Instantiate(vfx, transform.position, Quaternion.identity);
+            vfxInstantiate = Instantiate(vfx, transform.position, Quaternion.identity);
+            vfxInstantiate.transform.parent = this.gameObject.transform;  
             //gameManager.AddScore(ScoreIncrease);
         }
+    }
+
+    private void OnDisable()
+    {
+        Destroy(vfxInstantiate);
     }
 }

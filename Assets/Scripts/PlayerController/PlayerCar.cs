@@ -172,5 +172,21 @@ namespace UnityTemplateProjects.PlayerController
                 }
             }
         }
+
+        [SerializeField, Range(0, 40)] private float bounceForce;
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Wall"))
+            {
+
+                Vector3 normal = collision.GetContact(0).normal.normalized;
+                Vector3 reflectDir = Vector3.Reflect(transform.forward, normal);
+                rb.AddForce(reflectDir * bounceForce, ForceMode.Impulse);
+                Debug.Log("HERE");
+                Debug.DrawRay(transform.position, reflectDir);
+                
+            }
+        }
     }
 }
