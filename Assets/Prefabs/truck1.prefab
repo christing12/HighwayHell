@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4711783412160051336}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.1549826, y: 0.13113183, z: 2.6021242}
-  m_LocalScale: {x: 0.069222644, y: 0.069222644, z: 0.069222644}
+  m_LocalScale: {x: 0.14810877, y: 0.14810877, z: 0.14810877}
   m_Children:
   - {fileID: 4711783412893011173}
   m_Father: {fileID: 0}
@@ -79,9 +79,6 @@ MonoBehaviour:
   movementSpeed: 500
   maxMoveSpeed: 700
   vfx: {fileID: 3857479491688998060, guid: 5b3506694576d134699ed8bd1e4472bb, type: 3}
-  gameManager: {fileID: 0}
-  ScoreIncrease: 0
-  aud: {fileID: 3411504445156602898, guid: 10f049ff32d306444b6b559b2942b768, type: 3}
 --- !u!114 &4711783412160053109
 MonoBehaviour:
   m_ObjectHideFlags: 0
