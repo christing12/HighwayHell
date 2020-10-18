@@ -15,6 +15,7 @@ public class DistToSukk : MonoBehaviour
     public TextMeshProUGUI distText;
     public float deathThreshold; //distance before death is counted (behind the sukk)
     public float waitTime; //Number of seconds before killing the player after Sukk has caught up
+    public GameObject mainCamera; //Get the main camera so we can change the target to follow the enemy once we are sukked
 
     public Slider scoreSlider;
     public float sliderScaleFactor;
@@ -32,9 +33,13 @@ public class DistToSukk : MonoBehaviour
         //Check if Sukk has caught up, and if it has, start coroutine
         if (dist <= deathThreshold)
         {
+            //Play sukk sound effect when the player gets close
             FindObjectOfType<AudioManager>().PlaySound("Sukk");
-
+            //Start death coroutine
             StartCoroutine(waitForDeathCoRoutine());
+            //Also change camera to focus on sukk
+            CameraFollow cf = mainCamera.GetComponent<CameraFollow>();
+            cf.target = enemy.transform;
         }
 
         //Update score slider display
