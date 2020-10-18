@@ -75,6 +75,13 @@ namespace UnityTemplateProjects.PlayerController
                 rotational = 0.0f;
             }
 
+            //Stop linear acceleration (forward) in the air
+            //Check if outside of the threshold
+            if (Mathf.Abs(rb.transform.forward.y) > 0.05)
+            {
+                linear = 0.0f;
+            }
+
             // Getting current car state
             Quaternion turnAngle = Quaternion.AngleAxis(rotational * TURN, rb.transform.up);
             Vector3 fwd = turnAngle * rb.transform.forward;
