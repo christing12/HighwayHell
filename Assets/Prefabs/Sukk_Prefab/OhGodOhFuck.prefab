@@ -85,8 +85,7 @@ VFXRenderer:
   m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,7 +118,6 @@ GameObject:
   - component: {fileID: 9043690260384449907}
   - component: {fileID: 9043690260384449906}
   - component: {fileID: 9043690260384449905}
-  - component: {fileID: 9043690260384449904}
   - component: {fileID: 9043690260384449917}
   m_Layer: 0
   m_Name: OhGodOhFuck
@@ -203,20 +201,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.590323
   m_Center: {x: -0.0738569, y: 0, z: 0}
---- !u!114 &9043690260384449904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9043690260384449911}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83d41c3690ee4dc4d9a1344cbd7b49d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravityPull: 80
-  chaosEnergy: 80
 --- !u!54 &9043690260384449917
 Rigidbody:
   m_ObjectHideFlags: 0
