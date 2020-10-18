@@ -607,7 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vfx: {fileID: 1121192042590650, guid: 48c20b2bca1e8a8438d83388ec6ad739, type: 3}
-  explosionPower: 5000
+  explosionPower: 10000
 --- !u!1 &1287489102
 GameObject:
   m_ObjectHideFlags: 0
