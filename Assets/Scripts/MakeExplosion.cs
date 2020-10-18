@@ -20,7 +20,8 @@ public class MakeExplosion : MonoBehaviour
         {
             GameObject explosion = Instantiate(Explosion, transform.position, Quaternion.identity);
 
-            Destroy(this.gameObject, 0.01f);
+            gameObject.SetActive(false);
+           // Destroy(this.gameObject, 0.01f);
 
             Destroy(explosion, 2.2f);
         }

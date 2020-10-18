@@ -63,7 +63,7 @@ public class Sukk : MonoBehaviour
          if (other.tag == "Enemy")
             {
                 carCounter+=1;
-                Debug.Log("Car Counter: " + carCounter); 
+               // Debug.Log("Car Counter: " + carCounter); 
 
             }
         

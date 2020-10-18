@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -235,7 +235,7 @@ PrefabInstance:
     - target: {fileID: 3664129284245656360, guid: be3be3401c1a0fa44b31210689cb0032,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.8
+      value: -14.4
       objectReference: {fileID: 0}
     - target: {fileID: 3664129284245656360, guid: be3be3401c1a0fa44b31210689cb0032,
         type: 3}
@@ -590,7 +590,7 @@ RectTransform:
   m_GameObject: {fileID: 622082168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.03, y: 2.25, z: 5}
+  m_LocalScale: {x: 2.7, y: 2.25, z: 5}
   m_Children: []
   m_Father: {fileID: 1722398352}
   m_RootOrder: 0
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: f3ccb2e0924309a4f82149ee6e4d36ee, type: 3}
+  m_Texture: {fileID: 2800000, guid: 04380d2fa7a057b4ab7595e3cdb4f9d4, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -697,7 +697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 120, y: -200}
+  m_AnchoredPosition: {x: 120, y: -257}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &982900354
@@ -921,7 +921,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Controls
+  m_Text: 'Tutorial
 
 '
 --- !u!222 &1346979792
@@ -969,7 +969,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -120, y: -200}
+  m_AnchoredPosition: {x: -120, y: -257}
   m_SizeDelta: {x: 80, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1410580868
@@ -1127,12 +1127,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: e7deee6d75b3a414aa01d641a39ac42b, type: 3}
+  m_Texture: {fileID: 2800000, guid: d32a0fad8ce74b34e8a06174a70638e3, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1516,7 +1516,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1801307687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 982900357}
+        m_MethodName: SetGameObjectActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1801307687
 MonoBehaviour:
   m_ObjectHideFlags: 0

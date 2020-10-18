@@ -8,14 +8,18 @@ public class Landmine : MonoBehaviour
     public GameObject vfx;
     public float explosionPower = 500f;
 
+    void start()
+    {
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             rb = collision.rigidbody; //gets Players rigid body
-            rb.AddForce(0, explosionPower, 0);
-            transform.Rotate(0, 0, 0);
+            rb.AddForce(0, explosionPower, explosionPower / 10);
             Instantiate(vfx, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 }
