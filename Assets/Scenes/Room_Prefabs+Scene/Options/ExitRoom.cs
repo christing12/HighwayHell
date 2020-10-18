@@ -62,7 +62,7 @@ public class ExitRoom : MonoBehaviour
 
                      else if(Input.GetKeyDown(KeyCode.E) && counter == 4 && isInBox == true)
                 {
-                    displayText.text = "Think about all that work you need to catch up on...";
+                    displayText.text = "Ignore all that work you need to catch up on...";
                     counter+=1;
                   
                  
