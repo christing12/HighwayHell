@@ -31,6 +31,7 @@ public class EndlessRunner : MonoBehaviour
     [Tooltip("Percentage Length of how far back you want to start spawning")]
     [SerializeField, Range(0, 100)] float spawnBuffer;
     [SerializeField, Range(0, 10)] int numPlanesBuffer;
+    [SerializeField, Range(0, 30)] float timePerThreshold;
 
     private Vector3 startPos;
     Vector3 lastFramePosition;
@@ -42,11 +43,16 @@ public class EndlessRunner : MonoBehaviour
 
     float zLen;
 
+
+    int numThresholdsPassed = 1;
+
     private void Awake()
     {
         currLevel = 0;
         totalDistanceTraveled = 0;
         totalDistanceTraveled = 0;
+        numThresholdsPassed = 1;
+
         spawnTable.ValidateSpawnable();
     }
 
@@ -80,6 +86,11 @@ public class EndlessRunner : MonoBehaviour
         Vector3 dirTraveledSinceLastFrame = (playerTruck.transform.position - lastFramePosition);
         float distanceInTrackDirection = Vector3.Dot(dirTraveledSinceLastFrame, currTrackDirection.normalized);
         totalDistanceTraveled += distanceInTrackDirection;
+        if (totalTimeTraveled >= numThresholdsPassed * timePerThreshold)
+        {
+            Debug.Log("Changing Thresholds");
+            numThresholdsPassed++;
+        }
 
         CheckToSpawnNewPlane();
         lastFramePosition = playerTruck.transform.position;
@@ -134,16 +145,20 @@ public class EndlessRunner : MonoBehaviour
         float xPos = Random.Range(planePosition.x - b.extents.x, planePosition.x + b.extents.x);
         float yPos = Random.Range(planePosition.z - b.extents.z, planePosition.z + b.extents.z);
 
+
+     //   Debug.Log(totalDistanceTraveled);
         Spawnable s = spawnTable.PickSpawnable();
-        GameObject enemy = ObjectPooler.SharedInstance.GetPooledObjectByName(s.obj.name);
-        if (enemy != null)
+        int upperThreshold = numThresholdsPassed > 1 ? numThresholdsPassed : 1;
+        int numToSpawn = Random.Range(numThresholdsPassed, upperThreshold);
+
+        for (int i = 0; i < numToSpawn; i++)
         {
-            enemy.SetActive(true);
-            enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
-        }
-        else
-        {
-            Debug.Log(s.obj.name);
+            GameObject enemy = ObjectPooler.SharedInstance.GetPooledObjectByName(s.obj.name);
+            if (enemy != null)
+            {
+                enemy.SetActive(true);
+                enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
+            }
         }
     }
 }

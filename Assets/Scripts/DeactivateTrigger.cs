@@ -8,7 +8,7 @@ public class DeactivateTrigger : MonoBehaviour
     {
         if (ObjectPooler.SharedInstance.GetPooledObjectByName(other.name) != null && other.gameObject.tag != "ground")
         {
-            Debug.Log(other.gameObject.name);
+          //  Debug.Log(other.gameObject.name);
             other.gameObject.SetActive(false);
         }
     }

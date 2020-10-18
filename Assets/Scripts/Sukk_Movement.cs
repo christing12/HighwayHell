@@ -27,7 +27,7 @@ public class Sukk_Movement : MonoBehaviour
         {
             startingSpeed *= acceleration;
         }
-        Debug.Log("SPEED: " + startingSpeed);
+       // Debug.Log("SPEED: " + startingSpeed);
 
     }
 }
