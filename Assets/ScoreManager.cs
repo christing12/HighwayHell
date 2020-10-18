@@ -8,7 +8,10 @@ public class ScoreManager : MonoBehaviour
     // Start is called before the first frame update
     public float Score;
     public TextMeshProUGUI score;
+    public float timeMultipler;
+
     private float bonus;
+
     void Start()
     {
         Score = 0;
@@ -17,7 +20,8 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score.SetText(Score.ToString());
+        Score += timeMultipler*Time.deltaTime; //Time alive: TimeMultipler score = 1 second alive
+        score.SetText("SCORE: " + Score.ToString("F0"));
     }
 
     public void AddScore(float bonus)
