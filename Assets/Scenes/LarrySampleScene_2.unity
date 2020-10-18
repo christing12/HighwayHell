@@ -929,7 +929,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 84.14
+  field of view: 101.1
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -955,7 +955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660917105}
   m_LocalRotation: {x: 0.19175507, y: -0, z: -0, w: 0.9814428}
-  m_LocalPosition: {x: 0, y: 6.29, z: -10}
+  m_LocalPosition: {x: 0, y: 6.29, z: -8.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  acceleration: 1.2
+  acceleration: 1.1
 --- !u!114 &804436242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityPull: 100
   chaosEnergy: 100
-  counter: 200
+  counter: 500
 --- !u!135 &804436243
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1159,8 +1159,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.44
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 3.4876719
+  m_Center: {x: 0, y: -0.28509018, z: 0.13741821}
 --- !u!23 &804436244
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1216,7 +1216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804436240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02619259, y: 1.66, z: -9.95}
+  m_LocalPosition: {x: 0.02619259, y: 9.95, z: -9.95}
   m_LocalScale: {x: 2.8597, y: 2.8597, z: 2.8597}
   m_Children: []
   m_Father: {fileID: 0}

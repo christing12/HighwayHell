@@ -31,7 +31,7 @@ public class Sukk : MonoBehaviour
     {
        if (carCounter >= counter)
        {
-         gravityPull *= -1;
+         gravityPull *= -3;
          carCounter = 0;
          StartCoroutine(ResetCounter());
 
