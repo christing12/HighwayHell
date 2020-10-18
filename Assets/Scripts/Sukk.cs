@@ -11,6 +11,7 @@ public class Sukk : MonoBehaviour
     bool carIsMax;
     float carCounter;
     public float chaosEnergy;
+    public float counter;
    void Awake()
    {
        gravityRadius = GetComponent<SphereCollider>().radius;
@@ -28,7 +29,7 @@ public class Sukk : MonoBehaviour
 
     void Update ()
     {
-       if (carCounter >= 20000)
+       if (carCounter >= counter)
        {
          gravityPull *= -1;
          carCounter = 0;
@@ -59,11 +60,10 @@ public class Sukk : MonoBehaviour
 
          }
 
-         if (other.tag == "Car")
+         if (other.tag == "Enemy")
             {
-               carCounter+=1;
-               
-        ;
+                carCounter+=1;
+                Debug.Log("Car Counter: " + carCounter); 
 
             }
         

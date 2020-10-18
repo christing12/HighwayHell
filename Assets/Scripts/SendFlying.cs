@@ -20,7 +20,7 @@ public class SendFlying : MonoBehaviour
     {   
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("ENEMY COLLIDED");
+            //Debug.Log("ENEMY COLLIDED");
             rb = collision.rigidbody; //gets enemies rigid body
             Vector3 enemyPosition = rb.position;
             Vector3 playerPosition = rbPlayer.position;
