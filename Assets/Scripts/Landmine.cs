@@ -19,7 +19,8 @@ public class Landmine : MonoBehaviour
             rb = collision.rigidbody; //gets Players rigid body
             rb.AddRelativeForce(0, explosionPower, explosionPower / 10);
             Instantiate(vfx, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
+          //  Destroy(this.gameObject);
         }
     }
 }

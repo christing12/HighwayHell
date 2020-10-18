@@ -22,6 +22,7 @@ public class Death : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Instantiate(vfx, other.transform.position, Quaternion.identity);
             StartCoroutine(Die());
         }
     }
