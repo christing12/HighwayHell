@@ -49,7 +49,6 @@ public class DistToSukk : MonoBehaviour
         }
 
         //Update score slider display
-        Debug.Log(succSound.volume);
         float displaySlider = 1 - (dist / sliderScaleFactor);
         if (displaySlider < 0) displaySlider = 0; //Minimum value is 0, Max value is 1
         succSound.volume = displaySlider;
