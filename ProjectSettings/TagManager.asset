@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Wall
+  - ground
+  - spawnable
+  - truck
   layers:
   - Default
   - TransparentFX
