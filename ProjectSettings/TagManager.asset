@@ -7,7 +7,7 @@ TagManager:
   - Enemy
   - Wall
   - ground
-  - Death
+  - spawnable
   layers:
   - Default
   - TransparentFX

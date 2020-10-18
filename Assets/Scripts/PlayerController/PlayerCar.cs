@@ -85,13 +85,14 @@ namespace UnityTemplateProjects.PlayerController
             Vector3 adjVelocity = rb.velocity + forwardAccel * Time.deltaTime;
 
             // Clamping to forward and backward speed
-            if (adjVelocity.magnitude > MAX_FORWARD_SPEED)
+            float planeSpeed = Mathf.Sqrt(Mathf.Pow(adjVelocity.x,2) + Mathf.Pow(adjVelocity.z,2));
+            if (planeSpeed > MAX_FORWARD_SPEED)
             {
-                adjVelocity = fwd * MAX_FORWARD_SPEED;
+                adjVelocity = new Vector3(0,rb.velocity.y,0) + fwd * MAX_FORWARD_SPEED;
             }
-            else if (adjVelocity.magnitude < MIN_FORWARD_SPEED)
+            else if (planeSpeed < MIN_FORWARD_SPEED)
             {
-                adjVelocity = fwd * MIN_FORWARD_SPEED;
+                adjVelocity = new Vector3(0, rb.velocity.y, 0) + fwd * MIN_FORWARD_SPEED;
             }
 
             rb.velocity = adjVelocity;
@@ -111,7 +112,6 @@ namespace UnityTemplateProjects.PlayerController
             Vector3 localRot = rb.transform.localRotation.eulerAngles;
             Quaternion adjLocRot = Quaternion.Euler(localRot + new Vector3(0, 0, -1 * localRot.z));
             rb.transform.localRotation = adjLocRot;
-
 
             //Update speed text on screen
             speedText.SetText((rb.velocity.magnitude * 10).ToString("F1"));
