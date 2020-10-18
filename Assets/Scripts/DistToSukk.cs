@@ -27,6 +27,7 @@ public class DistToSukk : MonoBehaviour
 
     private void Start()
     {
+        mainCamera = Camera.main.gameObject;
         succSound.Play();
         
 

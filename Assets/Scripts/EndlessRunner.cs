@@ -44,6 +44,8 @@ public class EndlessRunner : MonoBehaviour
 
     [SerializeField, Range(0, 5)] float extraBuffer;
 
+    [SerializeField, Range(0, 10)] private int capSpawnables;
+
     float zLen;
 
 
@@ -143,21 +145,24 @@ public class EndlessRunner : MonoBehaviour
         }
     }
 
+    [SerializeField, Range(0, 5)] private float sideBuffer;
+
     private void SpawnNewEnemies(Vector3 planePosition, Collider collider)
     {
         Bounds b = collider.bounds;
-        float xPos = Random.Range(planePosition.x - b.extents.x, planePosition.x + b.extents.x);
+        float xPos = Random.Range(planePosition.x - b.extents.x  + sideBuffer, planePosition.x + b.extents.x - sideBuffer);
         float yPos = Random.Range(planePosition.z - b.extents.z, planePosition.z + b.extents.z);
 
 
         Spawnable s = spawnTable.PickSpawnable();
         int numToSpawn = Random.Range(1, numThresholdsPassed);
-        numToSpawn = numToSpawn <= 0 ? 1 : numToSpawn;
+        numToSpawn = (int) Mathf.Clamp((float) numToSpawn, 0f, (float) capSpawnables);
         for (int i = 0; i < numToSpawn; i++)
         {
             GameObject enemy = ObjectPooler.SharedInstance.GetPooledObjectByName(s.obj.name);
             if (enemy != null)
             {
+
                 enemy.SetActive(true);
                 enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
             }

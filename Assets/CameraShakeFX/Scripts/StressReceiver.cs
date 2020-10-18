@@ -6,11 +6,11 @@ public class StressReceiver : MonoBehaviour
     private Vector3 _lastPosition;
     private Vector3 _lastRotation;
     [Tooltip("Exponent for calculating the shake factor. Useful for creating different effect fade outs")]
-    public float TraumaExponent = 1;
+    public float TraumaExponent = 0.01f;
     [Tooltip("Maximum angle that the gameobject can shake. In euler angles.")]
-    public Vector3 MaximumAngularShake = Vector3.one * 5;
+    public Vector3 MaximumAngularShake = Vector3.one;
     [Tooltip("Maximum translation that the gameobject can receive when applying the shake effect.")]
-    public Vector3 MaximumTranslationShake = Vector3.one * .75f;
+    public Vector3 MaximumTranslationShake = Vector3.one * 0.5f;
 
     private void Update()
     {

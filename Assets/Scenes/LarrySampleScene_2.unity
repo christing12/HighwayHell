@@ -368,6 +368,21 @@ PrefabInstance:
       propertyPath: timePerThreshold
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
+        type: 3}
+      propertyPath: capSpawnables
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
+        type: 3}
+      propertyPath: sideBuffer
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802969527612941280, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
+        type: 3}
+      propertyPath: isDeathPlaying
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3802969527612941281, guid: 9ede125e2c5df5a49b2aa7cb7b971973,
         type: 3}
       propertyPath: m_LocalPosition.x
