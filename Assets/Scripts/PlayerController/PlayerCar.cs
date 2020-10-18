@@ -85,14 +85,14 @@ namespace UnityTemplateProjects.PlayerController
             Vector3 adjVelocity = rb.velocity + forwardAccel * Time.deltaTime;
 
             // Clamping to forward and backward speed
-            float planeSpeed = Mathf.sqrt(adjVelocity.x ^ 2 + adjVelocity.z ^ 2);
+            float planeSpeed = Mathf.Sqrt(Mathf.Pow(adjVelocity.x,2) + Mathf.Pow(adjVelocity.z,2));
             if (planeSpeed > MAX_FORWARD_SPEED)
             {
-                adjVelocity = Vector3(0,rb.velocity.y,0) + fwd * MAX_FORWARD_SPEED;
+                adjVelocity = new Vector3(0,rb.velocity.y,0) + fwd * MAX_FORWARD_SPEED;
             }
             else if (planeSpeed < MIN_FORWARD_SPEED)
             {
-                adjVelocity = Vector3(0, rb.velocity.y, 0) + fwd * MIN_FORWARD_SPEED;
+                adjVelocity = new Vector3(0, rb.velocity.y, 0) + fwd * MIN_FORWARD_SPEED;
             }
 
             rb.velocity = adjVelocity;
