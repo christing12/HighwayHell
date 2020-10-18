@@ -10,9 +10,10 @@ public class BasicEnemy : MonoBehaviour
     Rigidbody rb;
     float speed = 1.0f;
     public GameObject vfx;
-    public ScoreManager gameManager;
+    //public ScoreManager gameManager;
     // Start is called before the first frame update
-    public float ScoreIncrease;
+    //public float ScoreIncrease;
+    public AudioSource aud;
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -34,6 +35,7 @@ public class BasicEnemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
+            aud.Play();
             Instantiate(vfx, transform.position, Quaternion.identity);
             //gameManager.AddScore(ScoreIncrease);
         }

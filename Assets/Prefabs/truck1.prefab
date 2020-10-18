@@ -81,6 +81,7 @@ MonoBehaviour:
   vfx: {fileID: 3857479491688998060, guid: 5b3506694576d134699ed8bd1e4472bb, type: 3}
   gameManager: {fileID: 0}
   ScoreIncrease: 0
+  aud: {fileID: 3411504445156602898, guid: 10f049ff32d306444b6b559b2942b768, type: 3}
 --- !u!114 &4711783412160053109
 MonoBehaviour:
   m_ObjectHideFlags: 0
