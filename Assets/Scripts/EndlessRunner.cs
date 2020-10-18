@@ -6,6 +6,7 @@ using TMPro;
 
 public class EndlessRunner : MonoBehaviour
 {
+    [SerializeField] private SpawnTable spawnTable;
     enum Level {
         Level0 = 0,
         Level1,
@@ -40,13 +41,13 @@ public class EndlessRunner : MonoBehaviour
     [SerializeField, Range(0, 5)] float extraBuffer;
 
 
-    
 
     private void Awake()
     {
         currLevel = 0;
         totalDistanceTraveled = 0;
         totalDistanceTraveled = 0;
+        spawnTable.ValidateSpawnable();
     }
 
     // Start is called before the first frame update
@@ -118,7 +119,6 @@ public class EndlessRunner : MonoBehaviour
         foreach (GameObject ground in activeGround)
         {
             Vector3 forwardPos = ground.transform.position + Vector3.forward * (ground.GetComponent<Collider>().bounds.extents.z  + distToSpawnNewPlane);
-          //  float dot = Vector3.Dot(playerTruck.transform.forward, (forwardPos - playerTruck.transform.position).normalized);
             if (forwardPos.z - playerTruck.transform.position.z < 0)
             {
                 ground.SetActive(false);
@@ -133,7 +133,20 @@ public class EndlessRunner : MonoBehaviour
         float xPos = Random.Range(planePosition.x - b.extents.x, planePosition.x + b.extents.x);
         float yPos = Random.Range(planePosition.z - b.extents.z, planePosition.z + b.extents.z);
 
-        GameObject enemy = Instantiate(enemyPrefab);
-        enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
+        Spawnable s = spawnTable.PickSpawnable();
+        GameObject enemy = ObjectPooler.SharedInstance.GetPooledObjectByName(s.obj.name);
+        if (enemy != null)
+        {
+            enemy.SetActive(true);
+            enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
+        }
+        else
+        {
+            Debug.Log(s.obj.name);
+        }
+
+        //GameObject enemy = ObjectPooler.SharedInstance.GetPooledObject(spawnTable.PickSpawnable().obj.tag);
+        ////GameObject enemy = Instantiate(enemyPrefab);
+        //enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
     }
 }

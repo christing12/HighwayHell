@@ -45,6 +45,18 @@ public class ObjectPooler : MonoBehaviour
         return null;
     }
 
+    public GameObject GetPooledObjectByName(string name)
+    {
+        for (int i = 0; i < pooledObjects.Count; i++)
+        {
+            if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].name == (name + "(Clone)"))
+            {
+                return pooledObjects[i];
+            }
+        }
+        return null;
+    }
+
     public List<GameObject> GetActiveGameObjects(string tag)
     {
         List<GameObject> objs = new List<GameObject>();
