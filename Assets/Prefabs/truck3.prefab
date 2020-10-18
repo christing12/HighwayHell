@@ -154,6 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baf4e802e65bd7f4589d737ec2cce0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  maxMoveSpeed: 100
-  vfx: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+  movementSpeed: 500
+  maxMoveSpeed: 600
+  vfx: {fileID: 3857479491688998060, guid: 5b3506694576d134699ed8bd1e4472bb, type: 3}
+  gameManager: {fileID: 0}
+  ScoreIncrease: 0
