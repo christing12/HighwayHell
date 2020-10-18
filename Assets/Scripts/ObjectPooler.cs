@@ -27,6 +27,7 @@ public class ObjectPooler : MonoBehaviour
             for (int i = 0; i < item.amountToPool; i++)
             {
                 GameObject obj = (GameObject)Instantiate(item.objectToPool);
+                obj.name = item.objectToPool.name;
                 obj.SetActive(false);
                 pooledObjects.Add(obj);
             }
@@ -49,7 +50,7 @@ public class ObjectPooler : MonoBehaviour
     {
         for (int i = 0; i < pooledObjects.Count; i++)
         {
-            if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].name == (name + "(Clone)"))
+            if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].name == name)
             {
                 return pooledObjects[i];
             }
