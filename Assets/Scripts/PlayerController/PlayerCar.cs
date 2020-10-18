@@ -152,9 +152,8 @@ namespace UnityTemplateProjects.PlayerController
                 rb.useGravity = true;
             }
 
-
             //Update speed text on screen
-            speedText.SetText((rb.velocity.magnitude * 10).ToString("F1"));
+            speedText.SetText((rb.velocity.magnitude * 5).ToString("F0") + " MPH");
         }
 
         void GatherInputs()

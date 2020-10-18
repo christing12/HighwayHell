@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 //Calculates the distance between Sukk and the player
@@ -14,6 +15,9 @@ public class DistToSukk : MonoBehaviour
     public TextMeshProUGUI distText;
     public float deathThreshold; //distance before death is counted (behind the sukk)
     public float waitTime; //Number of seconds before killing the player after Sukk has caught up
+
+    public Slider scoreSlider;
+    public float sliderScaleFactor;
 
     private float dist; //Z distance between sukk and player car
 
@@ -30,6 +34,11 @@ public class DistToSukk : MonoBehaviour
         {
             StartCoroutine(waitForDeathCoRoutine());
         }
+
+        //Update score slider display
+        float displaySlider = 1 - (dist / sliderScaleFactor);
+        if (displaySlider < 0) displaySlider = 0; //Minimum value is 0, Max value is 1
+        scoreSlider.value = displaySlider;
     }
 
     IEnumerator waitForDeathCoRoutine()
