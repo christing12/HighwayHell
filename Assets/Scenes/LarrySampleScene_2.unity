@@ -2329,6 +2329,8 @@ MonoBehaviour:
   enemy: {fileID: 341561564}
   player: {fileID: 1704105379}
   distText: {fileID: 1203476826}
+  deathThreshold: -2
+  waitTime: 3
 --- !u!4 &1526331963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 428050894853094366, guid: fbfdd597bf6af8243a1d691c10466275,
