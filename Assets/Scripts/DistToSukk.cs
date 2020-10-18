@@ -40,12 +40,14 @@ public class DistToSukk : MonoBehaviour
         //Check if Sukk has caught up, and if it has, start coroutine
         if (dist <= deathThreshold)
         {
-            
             //Start death coroutine
             StartCoroutine(waitForDeathCoRoutine());
             //Also change camera to focus on sukk
             CameraFollow cf = mainCamera.GetComponent<CameraFollow>();
             cf.target = enemy.transform;
+            //Also stop the score from increasing further
+            ScoreManager sm = this.gameObject.GetComponent<ScoreManager>();
+            sm.enabled = false;
         }
 
         //Update score slider display

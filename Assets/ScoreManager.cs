@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     public float Score;
     public TextMeshProUGUI score;
     public float timeMultipler;
+    public bool enabled = true; //If disabled, time no longer increases your score
     private float bonus;
 
     public float highScore = 0;
@@ -24,7 +25,11 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Score += timeMultipler*Time.deltaTime; //Time alive: TimeMultipler score = 1 second alive
+        if(enabled)
+        {
+            Score += timeMultipler * Time.deltaTime; //Time alive: TimeMultipler score = 1 second alive
+        }
+
         score.SetText("SCORE: " + Score.ToString("F0"));
         if (Score > highScore)
         {
