@@ -19,7 +19,4 @@ MonoBehaviour:
   - obj: {fileID: 2614899390223505280, guid: 484dbcc6565585d479d2687118f1c36d, type: 3}
     weight: 30
     probabilityRange: {x: 0, y: 30}
-  - obj: {fileID: 8703212467432762844, guid: 398eac64b4ca48d4bbe810a3c686a491, type: 3}
-    weight: 50
-    probabilityRange: {x: 0, y: 30}
   totalProbabilityWeight: 100

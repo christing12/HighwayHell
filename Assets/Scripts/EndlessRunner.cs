@@ -40,7 +40,7 @@ public class EndlessRunner : MonoBehaviour
 
     [SerializeField, Range(0, 5)] float extraBuffer;
 
-    float zLen;
+
 
     private void Awake()
     {
@@ -53,8 +53,7 @@ public class EndlessRunner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        zLen = planePrefab.GetComponent<Collider>().bounds.size.z;
-        distToSpawnNewPlane = zLen - extraBuffer;
+        distToSpawnNewPlane = planePrefab.GetComponent<Collider>().bounds.size.z - extraBuffer;
         if(!ValidateZDist(distToSpawnNewPlane, planePrefab.GetComponent<Collider>()))
         {
             Debug.LogError("Z Dist to spawn new plane is less than lenght of plane");
@@ -65,9 +64,9 @@ public class EndlessRunner : MonoBehaviour
         {
             GameObject extraPlane = ObjectPooler.SharedInstance.GetPooledObject("ground");
             extraPlane.SetActive(true);
-            extraPlane.transform.position = startPos + Vector3.forward * (i + 1) * distToSpawnNewPlane;
-            lastPlanePositionSpawnedAt = extraPlane.transform.position;
+            extraPlane.transform.position = startPos + Vector3.forward * (i + 1) * planePrefab.GetComponent<Collider>().bounds.size.z;
         }
+        lastPlanePositionSpawnedAt = startPos + Vector3.forward * numPlanesBuffer * distToSpawnNewPlane;
         lastFramePosition = playerTruck.transform.position;
         lastPlaneSpawnPos = playerTruck.transform.position + Vector3.forward * (-distToSpawnNewPlane * (spawnBuffer / 100f));
 
@@ -89,7 +88,7 @@ public class EndlessRunner : MonoBehaviour
     private bool CheckToSpawnNewPlane()
     {
         float dist = Mathf.Abs(playerTruck.transform.position.z - lastPlaneSpawnPos.z);
-        if (dist >= distToSpawnNewPlane - extraBuffer)
+        if (dist >= distToSpawnNewPlane)
         {
             GameObject plane = ObjectPooler.SharedInstance.GetPooledObject("ground");
             lastPlaneSpawnPos = playerTruck.transform.position;
@@ -145,5 +144,9 @@ public class EndlessRunner : MonoBehaviour
         {
             Debug.Log(s.obj.name);
         }
+
+        //GameObject enemy = ObjectPooler.SharedInstance.GetPooledObject(spawnTable.PickSpawnable().obj.tag);
+        ////GameObject enemy = Instantiate(enemyPrefab);
+        //enemy.transform.position = new Vector3(xPos, playerTruck.transform.position.y, yPos);
     }
 }

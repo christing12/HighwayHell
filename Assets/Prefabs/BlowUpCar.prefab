@@ -135,9 +135,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3387319934141336890}
   - component: {fileID: 2920748142526032595}
-  - component: {fileID: 4187653515397300782}
   m_Layer: 0
-  m_Name: BlowUpCar
+  m_Name: PlayerCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,21 +173,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4187653515397300782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2614899390223505280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baf4e802e65bd7f4589d737ec2cce0a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 500
-  maxMoveSpeed: 700
-  vfx: {fileID: 8703300284200563801, guid: 7b9da98bcbc928c43b69072c5282702a, type: 3}
-  gameManager: {fileID: 0}
-  ScoreIncrease: 0
-  aud: {fileID: 3411504445156602898, guid: 10f049ff32d306444b6b559b2942b768, type: 3}
