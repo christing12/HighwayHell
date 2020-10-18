@@ -26,9 +26,7 @@ public class DistToSukk : MonoBehaviour
     private void Start()
     {
         succSound.Play();
-        dist = player.position.z - enemy.position.z;
-        succSound.volume = 1 - (dist / sliderScaleFactor);
-        Debug.Log("succ sound: " + succSound.volume);
+        
 
     }
     // Update is called once per frame
@@ -51,10 +49,11 @@ public class DistToSukk : MonoBehaviour
         }
 
         //Update score slider display
-        succSound.volume = 1 - (dist / sliderScaleFactor);
         Debug.Log(succSound.volume);
         float displaySlider = 1 - (dist / sliderScaleFactor);
         if (displaySlider < 0) displaySlider = 0; //Minimum value is 0, Max value is 1
+        succSound.volume = displaySlider;
+
         scoreSlider.value = displaySlider;
     }
 
