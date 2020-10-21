@@ -2048,7 +2048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a68836338ea83d46b760c5d1dacde56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: LarrySampleScene_2
+  SceneName: HighwayHell
 --- !u!114 &1764451570
 MonoBehaviour:
   m_ObjectHideFlags: 0
